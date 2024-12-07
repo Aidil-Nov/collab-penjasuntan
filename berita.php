@@ -1,6 +1,8 @@
 <?php include('./include/header.php');?>
 <?php include './Data/db_connect.php'; ?>
 
+
+    <!-- Carousel Berhasil -->
     <?php
     // Query untuk mengambil berita
     $sql = "SELECT judul AS title, foto AS image, DATE_FORMAT(tanggal_upload, '%d %M %Y') AS date, 'Berita' AS category, highlight AS description FROM berita ORDER BY tanggal_upload DESC LIMIT 10";
