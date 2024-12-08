@@ -332,7 +332,7 @@
 
 
 <body>
-    <section class="news-carousel">
+    <section class="news-carousel section-container">
         <div class="news-carousel__container">
             <div class="news-carousel__wrapper">
                 <!-- News cards akan dirender oleh JavaScript -->
