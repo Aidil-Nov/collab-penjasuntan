@@ -7,98 +7,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .news-carousel {
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            margin: auto;
-            box-shadow: var(--shadow);
-        }
 
-        .news-carousel__wrapper {
-            display: flex;
-            width: 100%;
-            transition: transform 0.5s ease;
-        }
+.carousel-container {
+    width: 1200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
 
-        .news-card {
-            flex: 0 0 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
 
-        .news-card__image {
-            width: 100%;
-            height: 600px;
-            object-fit: cover;
-        }
+.carousel-item {
+    min-width: 100%;
+}
 
-        .news-card__content {
-            padding: 20px;
-            background-color: white;
-        }
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
 
-        .news-card__title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
+.carousel-content {
+    padding: 20px;
+    text-align: left;
+}
 
-        .news-card__metadata {
-            display: flex;
-            justify-content: space-between;
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
+.carousel-content h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
 
-        .news-card__description {
-            color: #555;
-            font-size: 1rem;
-        }
+.carousel-content .date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+}
 
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-        }
+.carousel-content .description {
+    font-size: 16px;
+    color: #555;
+}
 
-        .carousel-btn {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            z-index: 10;
-        }
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
 
+.carousel-btn.left {
+    left: 10px;
+}
 
-        /* Responsive Breakpoints */
+.carousel-btn.right {
+    right: 10px;
+}
 
-        @media screen and (max-width: 480px) {
-            .news-card__image {
-                height: 200px;
-            }
-
-            .news-card__title {
-                font-size: 1.1rem;
-            }
-
-            .news-card__metadata {
-                font-size: 0.8rem;
-            }
-        }
-
+.carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
         /* BAGIAN CARD VERTIKAL */
 
@@ -198,21 +176,6 @@
         /* BERITA END */
 
         /* Responsivitas slider*/
-
-        @media screen and (max-width: 1024px) {
-            .vertical-card {
-                grid-template-columns: 1fr;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-image {
-                height: 250px;
-                /* Menyesuaikan tinggi gambar agar lebih proporsional */
-            }
-        }
 
         @media screen and (max-width: 768px) {
             .vertical-card {
@@ -345,96 +308,46 @@
     </section>
 
     <!-- Carousel Berhasil -->
-    <?php
-    // Query untuk mengambil berita
-    $sql = "SELECT judul AS title, foto AS image, DATE_FORMAT(tanggal_upload, '%d %M %Y') AS date, 'Berita' AS category, highlight AS description FROM berita ORDER BY tanggal_upload DESC LIMIT 10";
-    $result = $conn->query($sql);
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="image1.jpg" alt="Image 1">
+                <div class="carousel-content">
+                    <h3>Teknologi AI Membantu Dunia Kesehatan</h3>
+                    <p class="date">04 November 2024</p>
+                    <p class="description">
+                        AI digunakan untuk mendiagnosis penyakit lebih cepat dan akurat di rumah sakit besar.
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="image2.jpg" alt="Image 2">
+                <div class="carousel-content">
+                    <h3>Judul Artikel 2</h3>
+                    <p class="date">05 November 2024</p>
+                    <p class="description">
+                        Deskripsi singkat untuk artikel kedua.
+                    </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="image3.jpg" alt="Image 3">
+                <div class="carousel-content">
+                    <h3>Judul Artikel 3</h3>
+                    <p class="date">06 November 2024</p>
+                    <p class="description">
+                        Deskripsi singkat untuk artikel ketiga.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-btn left">&lt;</button>
+        <button class="carousel-btn right">&gt;</button>
+    </div>
 
-    // Siapkan data untuk JavaScript
-    $newsData = [];
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $row['image'] = 'uploads/' . $row['image']; // Tambahkan jalur folder uploads
-            $newsData[] = $row;
-        }
-    }
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
 
-    // Encode data menjadi JSON
-    $newsDataJson = json_encode($newsData);
-
-    // Tutup koneksi
-    $conn->close();
-    ?>
-
-    <script>
-        // Ambil data dari PHP
-        const newsData = <?php echo $newsDataJson; ?>;
-
-        // Definisi class NewsCarousel
-        class NewsCarousel {
-            constructor(data) {
-                this.data = data;
-                this.currentIndex = 0;
-                this.wrapper = document.querySelector('.news-carousel__wrapper');
-                this.prevBtn = document.querySelector('.carousel-btn-prev');
-                this.nextBtn = document.querySelector('.carousel-btn-next');
-
-                this.renderCards();
-                this.addEventListeners();
-                this.startAutoPlay();
-            }
-
-            renderCards() {
-                this.wrapper.innerHTML = this.data.map(news => `
-                    <div class="news-card">
-                        <img src="${news.image}" alt="Gambar Berita" class="news-card__image">
-                        <div class="news-card__content">
-                            <h2 class="news-card__title">${news.title}</h2>
-                            <div class="news-card__metadata">
-                                <span>${news.date}</span>
-                                <span>${news.category}</span>
-                            </div>
-                            <p class="news-card__description">${news.description}</p>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            addEventListeners() {
-                this.prevBtn.addEventListener('click', () => this.prev());
-                this.nextBtn.addEventListener('click', () => this.next());
-            }
-
-            next() {
-                this.currentIndex++;
-                if (this.currentIndex >= this.data.length) {
-                    this.currentIndex = 0;
-                }
-                this.updateCarousel();
-            }
-
-            prev() {
-                this.currentIndex--;
-                if (this.currentIndex < 0) {
-                    this.currentIndex = this.data.length - 1;
-                }
-                this.updateCarousel();
-            }
-
-            updateCarousel() {
-                const offset = -this.currentIndex * 100;
-                this.wrapper.style.transform = `translateX(${offset}%)`;
-            }
-
-            startAutoPlay() {
-                this.autoPlayInterval = setInterval(() => {
-                    this.next();
-                }, 5000);
-            }
-        }
-        // Inisialisasi Carousel
-        new NewsCarousel(newsData);
-    </script>
 
     <section class="about-section section-container">
         <div class="vertical-card">
@@ -455,6 +368,57 @@
             </div>
         </div>
     </section>
+
+    <script>
+    $(document).ready(function () {
+    const $carousel = $('.carousel');
+    const $items = $('.carousel-item');
+    const itemCount = $items.length;
+    let currentIndex = 0;
+    let autoSlide;
+
+    function showSlide(index) {
+        const offset = -index * 100; // Offset sesuai lebar item
+        $carousel.css('transform', `translateX(${offset}%)`);
+        currentIndex = index;
+    }
+
+    function nextSlide() {
+        const nextIndex = (currentIndex + 1) % itemCount;
+        showSlide(nextIndex);
+    }
+
+    function prevSlide() {
+        const prevIndex = (currentIndex - 1 + itemCount) % itemCount;
+        showSlide(prevIndex);
+    }
+
+    function startAutoSlide() {
+        autoSlide = setInterval(nextSlide, 3000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlide);
+    }
+
+    $('.carousel-btn.right').click(function () {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
+    });
+
+    $('.carousel-btn.left').click(function () {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
+    });
+
+    $carousel.hover(stopAutoSlide, startAutoSlide);
+
+    // Initialize carousel
+    startAutoSlide();
+    });
+</script>
 
     <section class="berita-section section-container">
         <!-- Left Section (Card Grid) -->
