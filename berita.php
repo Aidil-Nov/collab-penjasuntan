@@ -1,166 +1,13 @@
 <?php include('./include/header.php');?>
 <?php include './Data/db_connect.php'; ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-
-    <!-- Carousel Berhasil -->
-    <?php
-    // Query untuk mengambil berita
-    $sql = "SELECT judul AS title, foto AS image, DATE_FORMAT(tanggal_upload, '%d %M %Y') AS date, 'Berita' AS category, highlight AS description FROM berita ORDER BY tanggal_upload DESC LIMIT 10";
-    $result = $conn->query($sql);
-
-    // Siapkan data untuk JavaScript
-    $newsData = [];
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $row['image'] = 'uploads/' . $row['image']; // Tambahkan jalur folder uploads
-            $newsData[] = $row;
-        }
-    }
-
-    // Encode data menjadi JSON
-    $newsDataJson = json_encode($newsData);
-
-    // Tutup koneksi
-    $conn->close();
-    ?>
-    <section class="news-carousel">
-        <div class="news-carousel__container">
-            <div class="news-carousel__wrapper">
-                <!-- News cards akan dirender oleh JavaScript -->
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn carousel-btn-prev"> &#10094;</button>
-                <button class="carousel-btn carousel-btn-next"> &#10095;</button>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Ambil data dari PHP
-        const newsData = <?php echo $newsDataJson; ?>;
-
-        // Definisi class NewsCarousel
-        class NewsCarousel {
-            constructor(data) {
-                this.data = data;
-                this.currentIndex = 0;
-                this.wrapper = document.querySelector('.news-carousel__wrapper');
-                this.prevBtn = document.querySelector('.carousel-btn-prev');
-                this.nextBtn = document.querySelector('.carousel-btn-next');
-
-                this.renderCards();
-                this.addEventListeners();
-                this.startAutoPlay();
-            }
-
-            renderCards() {
-                this.wrapper.innerHTML = this.data.map(news => `
-                    <div class="news-card">
-                        <img src="${news.image}" alt="Gambar Berita" class="news-card__image">
-                        <div class="news-card__content">
-                            <h2 class="news-card__title">${news.title}</h2>
-                            <div class="news-card__metadata">
-                                <span>${news.date}</span>
-                                <span>${news.category}</span>
-                            </div>
-                            <p class="news-card__description">${news.description}</p>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            addEventListeners() {
-                this.prevBtn.addEventListener('click', () => this.prev());
-                this.nextBtn.addEventListener('click', () => this.next());
-            }
-
-            next() {
-                this.currentIndex++;
-                if (this.currentIndex >= this.data.length) {
-                    this.currentIndex = 0;
-                }
-                this.updateCarousel();
-            }
-
-            prev() {
-                this.currentIndex--;
-                if (this.currentIndex < 0) {
-                    this.currentIndex = this.data.length - 1;
-                }
-                this.updateCarousel();
-            }
-
-            updateCarousel() {
-                const offset = -this.currentIndex * 100;
-                this.wrapper.style.transform = `translateX(${offset}%)`;
-            }
-
-            startAutoPlay() {
-                this.autoPlayInterval = setInterval(() => {
-                    this.next();
-                }, 5000);
-            }
-        }
-
-        // Inisialisasi Carousel
-        new NewsCarousel(newsData);
-    </script>
-
-    <section class="about-section section-container">
-        <div class="vertical-card">
-            <div class="vertical-card-image-container">
-                <img src="./assets/about.png"  alt="Pendidikan Jasmani" class="vertical-card-image">
-            </div>
-            <div class="vertical-card-content">
-                <p class="vertical-card-subheader">Tentang</p>
-                <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
-                <p class="vertical-card-description">
-                    Program Studi Pendidikan Jasmani (Penjas) bertujuan mencetak tenaga pendidik dan profesional di bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
-                    dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup sehat dan pengembangan olahraga.
-                </p>
-                <button class="btn" role="button"><a href="/public/uploads/profil-dosen.html">Selengkapnya</a></button>
-            </div>
-        </div>
-    </section>
-
-    <section class="berita-section section-container">
-            <!-- Left Section (Card Grid) -->
-            <div class="card-grid">
-                <!-- Card 1 -->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                    <div class="card-content">
-                        <h2 class="card-title">Judul Berita 1</h2>
-                        <p class="card-description">
-                            Deskripsi singkat berita pertama untuk memberikan informasi kepada pembaca.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                    <div class="card-content">
-                        <h2 class="card-title">Judul Berita 2</h2>
-                        <p class="card-description">
-                            Deskripsi singkat berita kedua untuk memberikan informasi kepada pembaca.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                    <div class="card-content">
-                        <h2 class="card-title">Judul Berita 3</h2>
-                        <p class="card-description">
-                            Deskripsi singkat berita ketiga untuk memberikan informasi kepada pembaca.
-                        </p>
-                    </div>
-                </div>
-        </div>
-    </section>
-    <style>
+<style>
 .news-carousel {
     width: 100%;
     position: relative;
@@ -455,7 +302,170 @@
         margin-top: 0;
     }
 }
-
 </style>
+
+<body>
+    <section class="news-carousel">
+        <div class="news-carousel__container">
+            <div class="news-carousel__wrapper">
+                <!-- News cards akan dirender oleh JavaScript -->
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn carousel-btn-prev"> &#10094;</button>
+                <button class="carousel-btn carousel-btn-next"> &#10095;</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Carousel Berhasil -->
+    <?php
+    // Query untuk mengambil berita
+    $sql = "SELECT judul AS title, foto AS image, DATE_FORMAT(tanggal_upload, '%d %M %Y') AS date, 'Berita' AS category, highlight AS description FROM berita ORDER BY tanggal_upload DESC LIMIT 10";
+    $result = $conn->query($sql);
+    
+    // Siapkan data untuk JavaScript
+    $newsData = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $row['image'] = 'uploads/' . $row['image']; // Tambahkan jalur folder uploads
+            $newsData[] = $row;
+        }
+    }
+    
+    // Encode data menjadi JSON
+    $newsDataJson = json_encode($newsData);
+    
+    // Tutup koneksi
+    $conn->close();
+    ?>
+
+    <script>
+        // Ambil data dari PHP
+        const newsData = <?php echo $newsDataJson; ?>;
+    
+        // Definisi class NewsCarousel
+        class NewsCarousel {
+            constructor(data) {
+                this.data = data;
+                this.currentIndex = 0;
+                this.wrapper = document.querySelector('.news-carousel__wrapper');
+                this.prevBtn = document.querySelector('.carousel-btn-prev');
+                this.nextBtn = document.querySelector('.carousel-btn-next');
+    
+                this.renderCards();
+                this.addEventListeners();
+                this.startAutoPlay();
+            }
+    
+            renderCards() {
+                this.wrapper.innerHTML = this.data.map(news => `
+                    <div class="news-card">
+                        <img src="${news.image}" alt="Gambar Berita" class="news-card__image">
+                        <div class="news-card__content">
+                            <h2 class="news-card__title">${news.title}</h2>
+                            <div class="news-card__metadata">
+                                <span>${news.date}</span>
+                                <span>${news.category}</span>
+                            </div>
+                            <p class="news-card__description">${news.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+    
+            addEventListeners() {
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+            }
+    
+            next() {
+                this.currentIndex++;
+                if (this.currentIndex >= this.data.length) {
+                    this.currentIndex = 0;
+                }
+                this.updateCarousel();
+            }
+    
+            prev() {
+                this.currentIndex--;
+                if (this.currentIndex < 0) {
+                    this.currentIndex = this.data.length - 1;
+                }
+                this.updateCarousel();
+            }
+    
+            updateCarousel() {
+                const offset = -this.currentIndex * 100;
+                this.wrapper.style.transform = `translateX(${offset}%)`;
+            }
+    
+            startAutoPlay() {
+                this.autoPlayInterval = setInterval(() => {
+                    this.next();
+                }, 5000);
+            }
+        }
+        // Inisialisasi Carousel
+        new NewsCarousel(newsData);
+    </script>
+    
+    <section class="about-section section-container">
+        <div class="vertical-card">
+            <div class="vertical-card-image-container">
+                <img src="./assets/about.png"  alt="Pendidikan Jasmani" class="vertical-card-image">
+            </div>
+            <div class="vertical-card-content">
+                <p class="vertical-card-subheader">Tentang</p>
+                <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
+                <p class="vertical-card-description">
+                    Program Studi Pendidikan Jasmani (Penjas) bertujuan mencetak tenaga pendidik dan profesional di bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
+                    dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup sehat dan pengembangan olahraga.
+                </p>
+                <button class="btn" role="button"><a href="/public/uploads/profil-dosen.html">Selengkapnya</a></button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="berita-section section-container">
+            <!-- Left Section (Card Grid) -->
+            <div class="card-grid">
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">Judul Berita 1</h2>
+                        <p class="card-description">
+                            Deskripsi singkat berita pertama untuk memberikan informasi kepada pembaca.
+                        </p>
+                    </div>
+                </div>
+    
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">Judul Berita 2</h2>
+                        <p class="card-description">
+                            Deskripsi singkat berita kedua untuk memberikan informasi kepada pembaca.
+                        </p>
+                    </div>
+                </div>
+    
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" alt="" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">Judul Berita 3</h2>
+                        <p class="card-description">
+                            Deskripsi singkat berita ketiga untuk memberikan informasi kepada pembaca.
+                        </p>
+                    </div>
+                </div>
+        </div>
+    </section>
+</body>
+
+</html>
+    
 
 <?php include('./include/footer.php') ?>
