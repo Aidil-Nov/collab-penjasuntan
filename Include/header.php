@@ -207,30 +207,14 @@
     .nav-link {
         color: var(--text-dark);
         background-color: var(--primary-color-dark);
-        padding: 2rem;
+        padding: 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: relative;
     }
 
-    .nav-link::after {
-        content: '';
-        position: absolute;
-        width: 0%;
-        height: 3px;
-        bottom: 5;
-        left: 0;
-        background-color: var(--primary-color);
-        transform-origin: bottom right;
-        transition: width 0.2s ease-in;
-        border-radius: 10px;
-    }
-
-    .nav-link:hover::after {
-        width: 100%;
-        transform-origin: bottom left;
-    }
+   
 
     .nav-link.active {
         width: 100%;
@@ -367,6 +351,9 @@
             pointer-events: initial;
             z-index: 100;
         }
+        .nav-link:hover {
+            background-color: var(--primary-color);
+        }
     }
 
     @media screen and (min-width:1118px) {
@@ -411,11 +398,30 @@
             pointer-events: initial;
             transition: top .3s;
         }
+        .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0%;
+        height: 3px;
+        bottom: 5;
+        left: 0;
+        background-color: var(--primary-color);
+        transform-origin: bottom right;
+        transition: width 0.2s ease-in;
+        border-radius: 10px;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+        transform-origin: bottom left;
+    }
     }
     /* BAGIAN YANG MENAMPILKAN DROPDOWN MENU END */
     </style>
 </head>
+
 <body>
+    <!-- Navbar -->
     <header class="header">
         <nav class="nav container">
             <div class="nav-data">
