@@ -1,89 +1,96 @@
 <?php include './include/header.php'; ?>
 <?php include './Data/db_connect.php'; ?>
-<style>
-.section-container {
-    max-width: var(--max-width);
-    margin: auto;
-    padding: 3rem 1rem;
-}
 
-.section-subheader {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--text-dark);
-    position: relative;
-}
+<html lang="en">
 
-.section-subheader::after {
-    position: absolute;
-    content: "";
-    top: 50%;
-    transform: translate(1rem, -50%);
-    height: 2px;
-    width: 4rem;
-    background-color: var(--primary-color);
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <style>
+        /* Reusable Class */
+        .section-container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 3rem 1rem;
+        }
 
-.section-header {
-    max-width: 600px;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 3rem;
-    color: var(--text-dark);
-}
+        .section-subheader {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            position: relative;
+        }
 
-.section-description {
-    max-width: 600px;
-    margin-bottom: 1rem;
-    color: var(--text-light);
-}
+        .section-subheader::after {
+            position: absolute;
+            content: "";
+            top: 50%;
+            transform: translate(1rem, -50%);
+            height: 2px;
+            width: 4rem;
+            background-color: var(--primary-color);
+        }
 
-.section-description-black {
-    max-width: 600px;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
+        .section-header {
+            max-width: 600px;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 3rem;
+            color: var(--text-dark);
+        }
 
-.btn {
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-color-dark);
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .section-description {
+            max-width: 600px;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
 
-.btn:hover {
-    background-color: var(--primary-color);
-}
+        .section-description-black {
+            max-width: 600px;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
 
-.btn-black {
-    padding: 0.75rem 1.5rem;
-    outline: none;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--white);
-    background-color: var(--text-dark);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        .btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color-dark);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.btn:hover {
-    background-color: var(--primary-color);
-}
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
 
-.btn-black:hover {
-    background-color: var(--white);
-    color: var(--text-dark);
-}
+        .btn-black {
+            padding: 0.75rem 1.5rem;
+            outline: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--white);
+            background-color: var(--text-dark);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
 
-/* REUSABLE CLASS END */
+        .btn-black:hover {
+            background-color: var(--white);
+            color: var(--text-dark);
+        }
+        /* REUSABLE CLASS END */
+
         /* Hero */
         .hero-section {
             height: 100vh;
@@ -103,9 +110,10 @@
         .hero-text {
             color: rgb(255, 255, 255);
         }
-        
+        /* Hero End */
 
-        /* Vertical Card */
+
+        /* About Card */
         .vertical-card {
             display: grid;
             gap: 1rem;
@@ -152,6 +160,7 @@
             color: #333;
             margin-bottom: 1.5rem;
         }
+        /* About End */
 
         /* Fasilitas */
         .fasilitas-section {
@@ -187,6 +196,7 @@
             font-weight: bold;
             color: #333;
         }
+
         /* Card Berita */
         .card-grid {
             display: grid;
@@ -232,6 +242,7 @@
             font-size: 14px;
             color: #555;
         }
+
         /* Gallery */
         .gallery-grid {
             display: grid;
@@ -461,132 +472,142 @@
             }
         }
     </style>
+</head>
+<body>
 
-    <!-- Hero Card Section -->
-    <section class="hero-section">
-        <div class="hero-text">
-            <h1>Selamat Datang di laman Prodi Pendidikan Jasmani <br> FKIP Universitas Tanjungpura</h1>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-text">
+        <h1>Selamat Datang di laman Prodi Pendidikan Jasmani <br> FKIP Universitas Tanjungpura</h1>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+
+<!-- About Card Section-->
+<section class="about-section section-container">
+    <div class="vertical-card">
+        <div class="vertical-card-image-container">
+            <img src="./assets/about.png" alt="Pendidikan Jasmani" class="vertical-card-image">
         </div>
-    </section>
-    <!-- Bagian Hero Section End -->
-
-
-    <!-- Vertical Card Section-->
-    <section class="about-section section-container">
-        <div class="vertical-card">
-            <div class="vertical-card-image-container">
-                <img src="./assets/about.png" alt="Pendidikan Jasmani" class="vertical-card-image">
-            </div>
-            <div class="vertical-card-content">
-                <p class="section-subheader">Tentang</p>
-                <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
-                <p class="vertical-card-description">
-                    Program Studi Pendidikan Jasmani atau biasa disebut penjas bertujuan mencetak tenaga pendidik dan profesional di
-                    bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan
-                    jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
-                    dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup
-                    sehat dan pengembangan olahraga.
-                </p>
-                <button class="btn" role="button">Selengkapnya</button>
-            </div>
+        <div class="vertical-card-content">
+            <p class="section-subheader">Tentang</p>
+            <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
+            <p class="vertical-card-description">
+                Program Studi Pendidikan Jasmani atau biasa disebut penjas bertujuan mencetak tenaga pendidik dan
+                profesional di
+                bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan
+                jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
+                dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup
+                sehat dan pengembangan olahraga.
+            </p>
+            <button class="btn" role="button">Selengkapnya</button>
         </div>
-    </section>
-    <!-- Vertical Card Section End-->
+    </div>
+</section>
+<!-- About Card End-->
 
-    <!-- Fasility Section -->
-    <section class="fasilitas-section section-container">
-        <h2 class="section-subheader">Fasilitas</h2>
-        <h1 class="section-header">Prodi</h1>
-        <div class="facility-grid">
-            <div class="facility-item">
-                <span><i class="fa-solid fa-mosque"></i></span>
-                <h3 class="facility-title">Masjid</h3>
-            </div>
-            <div class="facility-item">
-                <span><i class="fa-solid fa-wifi"></i></span>
-                <h3 class="facility-title">Free Wifi</h3>
-            </div>
-            <div class="facility-item">
-                <span><i class="fa-solid fa-book"></i></span>
-                <h3 class="facility-title">Perpustakaan</h3>
-            </div>
-            <div class="facility-item">
-                <span><i class="fa-solid fa-utensils"></i></span>
-                <h3 class="facility-title">Kantin</h3>
-            </div>
-            <div class="facility-item">
-                <span><i class="fa-solid fa-school"></i></span>
-                <h3 class="facility-title">Auditorium</h3>
-            </div>
-            <div class="facility-item">
-                <span><i class="fa-solid fa-dumbbell"></i></span>
-                <h3 class="facility-title">Gym</h3>
-            </div>
+<!-- Fasilitas -->
+<section class="fasilitas-section section-container">
+    <h2 class="section-subheader">Fasilitas</h2>
+    <h1 class="section-header">Prodi</h1>
+    <div class="facility-grid">
+        <div class="facility-item">
+            <span><i class="fa-solid fa-mosque"></i></span>
+            <h3 class="facility-title">Masjid</h3>
         </div>
-    </section>
-    <!-- Fasilitas Section End -->
+        <div class="facility-item">
+            <span><i class="fa-solid fa-wifi"></i></span>
+            <h3 class="facility-title">Free Wifi</h3>
+        </div>
+        <div class="facility-item">
+            <span><i class="fa-solid fa-book"></i></span>
+            <h3 class="facility-title">Perpustakaan</h3>
+        </div>
+        <div class="facility-item">
+            <span><i class="fa-solid fa-utensils"></i></span>
+            <h3 class="facility-title">Kantin</h3>
+        </div>
+        <div class="facility-item">
+            <span><i class="fa-solid fa-school"></i></span>
+            <h3 class="facility-title">Auditorium</h3>
+        </div>
+        <div class="facility-item">
+            <span><i class="fa-solid fa-dumbbell"></i></span>
+            <h3 class="facility-title">Gym</h3>
+        </div>
+    </div>
+</section>
+<!-- Fasilitas End -->
 
-    <!-- Berita Card Section -->
-    <?php // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
-    $sql = "SELECT foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 3";
-    $result = $conn->query($sql);
-    ?>
-    <!-- Berita Card Section -->
-    <section class="berita-section section-container">
-        <h2 class="section-subheader">Berita</h2>
-        <h1 class="section-header">Pendidikan Jasmani</h1>
-        <div class="card-grid">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    // Jalur gambar, diasumsikan folder uploads berada di direktori root server
-                    $imagePath = 'uploads/' . $row['foto'];
-                    ?>
-                    <!-- Card -->
-                    <div class="card">
-                        <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
-                        <div class="card-content">
-                            <h2 class="card-title"><?= htmlspecialchars($row['judul']); ?></h2>
-                            <p class="meta-data section-description"><?= date('d M Y', strtotime($row['tanggal_upload'])); ?></p>
-                            <p class="card-description">
-                                <?= htmlspecialchars($row['highlight']); ?>
-                            </p>
-                            <button type="button" class="btn">Selengkapnya</button>
-                        </div>
+<!-- Berita Card Section -->
+<?php // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
+$sql = "SELECT foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 3";
+$result = $conn->query($sql);
+?>
+<section class="berita-section section-container">
+    <h2 class="section-subheader">Berita</h2>
+    <h1 class="section-header">Pendidikan Jasmani</h1>
+    <div class="card-grid">
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Jalur gambar, diasumsikan folder uploads berada di direktori root server
+                $imagePath = 'uploads/' . $row['foto'];
+                ?>
+                <!-- Card -->
+                <div class="card">
+                    <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title"><?= htmlspecialchars($row['judul']); ?></h2>
+                        <p class="meta-data section-description"><?= date('d M Y', strtotime($row['tanggal_upload'])); ?></p>
+                        <p class="card-description">
+                            <?= htmlspecialchars($row['highlight']); ?>
+                        </p>
+                        <button type="button" class="btn">Selengkapnya</button>
                     </div>
-                    <?php
-                }
-            } else {
-                echo "<p>Tidak ada berita tersedia.</p>";
+                </div>
+                <?php
             }
-            ?>
-        </div>
-    </section>
+        } else {
+            echo "<p>Tidak ada berita tersedia.</p>";
+        }
+        ?>
+    </div>
+</section>
+<!-- Berita Card End -->
 
-    <?php // Query untuk mengambil 9 foto terbaru berdasarkan tanggal_upload
-    $sql = "SELECT foto FROM galeri ORDER BY tanggal_upload DESC LIMIT 9";
-    $result = $conn->query($sql);
-    ?>
+<!-- Galeri Mahasiswa -->
 
-    <!-- Galeri Mahasiswa -->
-    <section class="gallery-section section-container">
-        <h2 class="section-subheader">Galeri</h2>
-        <h1 class="section-header">Mahasiswa</h1>
-        <div class="gallery-grid">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    // Jalur gambar, diasumsikan folder uploads berada di direktori root server
-                    $imagePath = 'uploads/' . $row['foto'];
-                    ?>
-                    <img src="<?= htmlspecialchars($imagePath); ?>" class="gallery-image" alt="Gallery Image">
-                    <?php
-                }
-            } else {
-                echo "<p>Tidak ada foto di galeri.</p>";
+<?php // Query untuk mengambil 9 foto terbaru berdasarkan tanggal_upload
+$sql = "SELECT foto FROM galeri ORDER BY tanggal_upload DESC LIMIT 9";
+$result = $conn->query($sql);
+?>
+
+<section class="gallery-section section-container">
+    <h2 class="section-subheader">Galeri</h2>
+    <h1 class="section-header">Mahasiswa</h1>
+    <div class="gallery-grid">
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Jalur gambar, diasumsikan folder uploads berada di direktori root server
+                $imagePath = 'uploads/' . $row['foto'];
+                ?>
+                <img src="<?= htmlspecialchars($imagePath); ?>" class="gallery-image" alt="Gallery Image">
+                <?php
             }
-            ?>
-        </div>
-    </section>
+        } else {
+            echo "<p>Tidak ada foto di galeri.</p>";
+        }
+        ?>
+    </div>
+</section>
+<!-- Galeri End -->
+</body>
+
+</html>
+
+
 
 <?php include('./include/footer.php'); ?>

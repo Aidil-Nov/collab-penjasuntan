@@ -5,8 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Berita</title>
     <style>
+        /* Carousel Card */
         .news-carousel {
             width: 100%;
             position: relative;
@@ -81,27 +82,12 @@
             cursor: pointer;
             z-index: 10;
         }
+        /* Carousel End */
 
 
         /* Responsive Breakpoints */
 
-        @media screen and (max-width: 480px) {
-            .news-card__image {
-                height: 200px;
-            }
-
-            .news-card__title {
-                font-size: 1.1rem;
-            }
-
-            .news-card__metadata {
-                font-size: 0.8rem;
-            }
-        }
-
-
-        /* BAGIAN CARD VERTIKAL */
-
+        /* CARD VERTIKAL */
         .vertical-card {
             display: grid;
             gap: 1rem;
@@ -148,12 +134,10 @@
             color: #333;
             margin-bottom: 1.5rem;
         }
+        /* Card Vertikal  */
 
 
-        /* BAGIAN CARD DIBAWAH VERTIKAL */
-
-
-        /* BERITA */
+        /* Card Berita */
 
         .berita-section {
             margin: 0 auto;
@@ -195,9 +179,23 @@
             color: #555;
         }
 
-        /* BERITA END */
+        /* Card Berita End */
 
-        /* Responsivitas slider*/
+        /* Responsivitas*/
+
+        @media screen and (max-width: 480px) {
+            .news-card__image {
+                height: 200px;
+            }
+
+            .news-card__title {
+                font-size: 1.1rem;
+            }
+
+            .news-card__metadata {
+                font-size: 0.8rem;
+            }
+        }
 
         @media screen and (max-width: 1024px) {
             .vertical-card {
@@ -322,17 +320,13 @@
             .card-description {
                 font-size: 12px;
             }
-
-            .slider-container {
-                margin-top: 0;
-            }
         }
     </style>
 </head>
 
 
 <body>
-    <section class="news-carousel section-container">
+    <section class="news-carousel">
         <div class="news-carousel__container">
             <div class="news-carousel__wrapper">
                 <!-- News cards akan dirender oleh JavaScript -->
