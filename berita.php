@@ -5,348 +5,490 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Berita</title>
     <style>
-
-.carousel-container {
-    width: 1200px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background: #fff;
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.carousel-item {
-    min-width: 100%;
-}
-
-.carousel-item img {
-    width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ddd;
-}
-
-.carousel-content {
-    padding: 20px;
-    text-align: left;
-}
-
-.carousel-content h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.carousel-content .date {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 10px;
-}
-
-.carousel-content .description {
-    font-size: 16px;
-    color: #555;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.carousel-btn.left {
-    left: 10px;
-}
-
-.carousel-btn.right {
-    right: 10px;
-}
-
-.carousel-btn:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-        /* BAGIAN CARD VERTIKAL */
-
-        .vertical-card {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            align-items: center;
+        .news-slider {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
             overflow: hidden;
-            padding: 1rem;
-            background: #ffffff;
-            border-radius: 5px;
-            box-shadow: var(--shadow);
+            width: 100%;
         }
 
-        .vertical-card-image-container {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            border-radius: 5px;
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
 
-        .vertical-card-image {
+        .slide {
+            flex: 0 0 100%;
             width: 100%;
-            height: 100%;
+        }
+
+        .slide-image {
+            width: 100%;
+            aspect-ratio: 16/9;
             object-fit: cover;
         }
 
-        .vertical-card-content {
-            display: block;
+        .slide-content {
+            padding: 15px;
+            background-color: #f4f4f4;
         }
 
-        .vertical-card-subheader {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 0.5rem;
+        .slide-navigation {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-button {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .slide-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .slide-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slide-indicator.active {
+            background-color: #333;
+        }
+
+        /* Responsive Media Queries */
+        @media screen and (max-width: 480px) {
+            .slide-content {
+                padding: 10px;
+            }
+            .slide-content h2 {
+                font-size: 16px;
+            }
+            .slide-content p {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .slide-content {
+                padding: 12px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .slide-content {
+                padding: 14px;
+            }
+        }
+    
+    /* BAGIAN CARD VERTIKAL */
+
+    .vertical-card {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        align-items: center;
+        overflow: hidden;
+        padding: 1rem;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: var(--shadow);
+    }
+
+    .vertical-card-image-container {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+    .vertical-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .vertical-card-content {
+        display: block;
+    }
+
+    .vertical-card-subheader {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 0.5rem;
+    }
+
+    .vertical-card-header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    .vertical-card-description {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+
+    /* BAGIAN CARD DIBAWAH VERTIKAL */
+
+
+    /* BERITA */
+
+    .berita-section {
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-description {
+        font-size: 14px;
+        color: #555;
+    }
+
+    /* BERITA END */
+
+    /* Responsivitas slider*/
+
+    @media screen and (max-width: 768px) {
+        .vertical-card {
+            grid-template-columns: 1fr;
         }
 
         .vertical-card-header {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 1rem;
+            font-size: 20px;
         }
 
         .vertical-card-description {
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 1.5rem;
-        }
-
-
-        /* BAGIAN CARD DIBAWAH VERTIKAL */
-
-
-        /* BERITA */
-
-        .berita-section {
-            margin: 0 auto;
-            padding: 20px;
+            font-size: 13px;
         }
 
         .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            grid-template-columns: 1fr;
+            /* Menampilkan satu kolom penuh */
         }
 
         .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            height: 220px;
+            /* Menyesuaikan tinggi gambar */
         }
 
         .card-content {
-            padding: 15px;
+            padding: 10px;
+            /* Mengurangi padding untuk layar kecil */
         }
 
         .card-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 16px;
+            /* Ukuran font lebih kecil */
         }
 
         .card-description {
+            font-size: 13px;
+            /* Ukuran font deskripsi lebih kecil */
+        }
+
+        .card-grid {
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 kolom untuk card */
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .vertical-card {
+            grid-template-columns: 1fr;
+            padding: 0.5rem;
+        }
+
+        .vertical-card-header {
+            font-size: 18px;
+        }
+
+        .vertical-card-description {
+            font-size: 12px;
+        }
+
+        .vertical-card-button {
+            padding: 0.4rem 0.8rem;
             font-size: 14px;
-            color: #555;
         }
 
-        /* BERITA END */
-
-        /* Responsivitas slider*/
-
-        @media screen and (max-width: 768px) {
-            .vertical-card {
-                grid-template-columns: 1fr;
-            }
-
-            .vertical-card-header {
-                font-size: 20px;
-            }
-
-            .vertical-card-description {
-                font-size: 13px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-                /* Menampilkan satu kolom penuh */
-            }
-
-            .card-image {
-                height: 220px;
-                /* Menyesuaikan tinggi gambar */
-            }
-
-            .card-content {
-                padding: 10px;
-                /* Mengurangi padding untuk layar kecil */
-            }
-
-            .card-title {
-                font-size: 16px;
-                /* Ukuran font lebih kecil */
-            }
-
-            .card-description {
-                font-size: 13px;
-                /* Ukuran font deskripsi lebih kecil */
-            }
-
-            .card-grid {
-                grid-template-columns: repeat(2, 1fr);
-                /* 2 kolom untuk card */
-            }
+        .card-grid {
+            grid-template-columns: 1fr;
+            /* Tetap satu kolom */
         }
 
-        @media screen and (max-width: 480px) {
-            .vertical-card {
-                grid-template-columns: 1fr;
-                padding: 0.5rem;
-            }
-
-            .vertical-card-header {
-                font-size: 18px;
-            }
-
-            .vertical-card-description {
-                font-size: 12px;
-            }
-
-            .vertical-card-button {
-                padding: 0.4rem 0.8rem;
-                font-size: 14px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-                /* Tetap satu kolom */
-            }
-
-            .card {
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                /* Mengurangi bayangan */
-            }
-
-            .card-image {
-                height: 180px;
-                /* Gambar lebih kecil untuk layar sempit */
-            }
-
-            .card-title {
-                font-size: 15px;
-                /* Ukuran font lebih kecil */
-            }
-
-            .card-description {
-                font-size: 12px;
-                /* Ukuran font deskripsi lebih kecil */
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-                /* 1 kolom untuk card */
-            }
-
-            .news-title {
-                font-size: 14px;
-            }
-
-            .news-date {
-                font-size: 12px;
-            }
-
-            .card-title {
-                font-size: 16px;
-            }
-
-            .card-description {
-                font-size: 12px;
-            }
-
-            .slider-container {
-                margin-top: 0;
-            }
+        .card {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Mengurangi bayangan */
         }
+
+        .card-image {
+            height: 180px;
+            /* Gambar lebih kecil untuk layar sempit */
+        }
+
+        .card-title {
+            font-size: 15px;
+            /* Ukuran font lebih kecil */
+        }
+
+        .card-description {
+            font-size: 12px;
+            /* Ukuran font deskripsi lebih kecil */
+        }
+
+        .card-grid {
+            grid-template-columns: 1fr;
+            /* 1 kolom untuk card */
+        }
+
+        .news-title {
+            font-size: 14px;
+        }
+
+        .news-date {
+            font-size: 12px;
+        }
+
+        .card-title {
+            font-size: 16px;
+        }
+
+        .card-description {
+            font-size: 12px;
+        }
+
+        .slider-container {
+            margin-top: 0;
+        }
+    }
     </style>
 </head>
 
-
 <body>
-    <section class="news-carousel section-container">
-        <div class="news-carousel__container">
-            <div class="news-carousel__wrapper">
-                <!-- News cards akan dirender oleh JavaScript -->
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn carousel-btn-prev"> &#10094;</button>
-                <button class="carousel-btn carousel-btn-next"> &#10095;</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Carousel Berhasil -->
-    <div class="carousel-container">
-        <div class="carousel">
-            <div class="carousel-item">
-                <img src="image1.jpg" alt="Image 1">
-                <div class="carousel-content">
-                    <h3>Teknologi AI Membantu Dunia Kesehatan</h3>
-                    <p class="date">04 November 2024</p>
-                    <p class="description">
-                        AI digunakan untuk mendiagnosis penyakit lebih cepat dan akurat di rumah sakit besar.
-                    </p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="image2.jpg" alt="Image 2">
-                <div class="carousel-content">
-                    <h3>Judul Artikel 2</h3>
-                    <p class="date">05 November 2024</p>
-                    <p class="description">
-                        Deskripsi singkat untuk artikel kedua.
-                    </p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="image3.jpg" alt="Image 3">
-                <div class="carousel-content">
-                    <h3>Judul Artikel 3</h3>
-                    <p class="date">06 November 2024</p>
-                    <p class="description">
-                        Deskripsi singkat untuk artikel ketiga.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-btn left">&lt;</button>
-        <button class="carousel-btn right">&gt;</button>
+<div class="news-slider" id="newsSlider">
+        <!-- Slider akan diisi secara dinamis -->
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        class NewsSlider {
+            constructor(containerId) {
+                this.container = document.getElementById(containerId);
+                this.slides = [];
+                this.currentSlideIndex = 0;
+                this.isHovering = false;
+                this.sliderInterval = null;
+
+                this.initSlider();
+            }
+
+            initSlider() {
+                this.createSliderContainer();
+                this.createNavButtons();
+                this.createIndicators();
+                this.startAutoSlide();
+                this.addHoverListeners();
+            }
+
+            createSliderContainer() {
+                const sliderContainer = document.createElement('div');
+                sliderContainer.classList.add('slider-container');
+                this.container.appendChild(sliderContainer);
+                this.sliderContainer = sliderContainer;
+            }
+
+            createNavButtons() {
+                const navContainer = document.createElement('div');
+                navContainer.classList.add('slide-navigation');
+
+                const prevButton = document.createElement('button');
+                prevButton.classList.add('nav-button', 'prev-button');
+                prevButton.innerHTML = '&lt;';
+                prevButton.addEventListener('click', () => this.prevSlide());
+
+                const nextButton = document.createElement('button');
+                nextButton.classList.add('nav-button', 'next-button');
+                nextButton.innerHTML = '&gt;';
+                nextButton.addEventListener('click', () => this.nextSlide());
+
+                navContainer.appendChild(prevButton);
+                navContainer.appendChild(nextButton);
+                this.container.appendChild(navContainer);
+            }
+
+            createIndicators() {
+                const indicatorContainer = document.createElement('div');
+                indicatorContainer.classList.add('slide-indicators');
+                this.container.appendChild(indicatorContainer);
+                this.indicatorContainer = indicatorContainer;
+            }
+
+            addSlide(slideData) {
+                this.slides.push(slideData);
+                this.renderSlides();
+                this.updateIndicators();
+            }
+
+            renderSlides() {
+                this.sliderContainer.innerHTML = '';
+                this.slides.forEach(slide => {
+                    const slideElement = document.createElement('div');
+                    slideElement.classList.add('slide');
+
+                    const image = document.createElement('img');
+                    image.src = slide.image;
+                    image.alt = slide.title;
+                    image.classList.add('slide-image');
+
+                    const content = document.createElement('div');
+                    content.classList.add('slide-content');
+
+                    const title = document.createElement('h2');
+                    title.textContent = slide.title;
+
+                    const metaInfo = document.createElement('div');
+                    metaInfo.innerHTML = `<span>${slide.author} | ${slide.date}</span>`;
+
+                    const description = document.createElement('p');
+                    description.textContent = slide.description;
+
+                    content.appendChild(title);
+                    content.appendChild(metaInfo);
+                    content.appendChild(description);
+
+                    slideElement.appendChild(image);
+                    slideElement.appendChild(content);
+
+                    this.sliderContainer.appendChild(slideElement);
+                });
+
+                this.updateSliderPosition();
+            }
+
+            updateSliderPosition() {
+                const offset = this.currentSlideIndex * -100;
+                this.sliderContainer.style.transform = `translateX(${offset}%)`;
+            }
+
+            updateIndicators() {
+                this.indicatorContainer.innerHTML = '';
+                this.slides.forEach((_, index) => {
+                    const indicator = document.createElement('button');
+                    indicator.classList.add('slide-indicator');
+                    if (index === this.currentSlideIndex) {
+                        indicator.classList.add('active');
+                    }
+                    indicator.addEventListener('click', () => this.goToSlide(index));
+                    this.indicatorContainer.appendChild(indicator);
+                });
+            }
+
+            nextSlide() {
+                this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
+                this.updateSliderPosition();
+                this.updateIndicators();
+            }
+
+            prevSlide() {
+                this.currentSlideIndex = (this.currentSlideIndex - 1 + this.slides.length) % this.slides.length;
+                this.updateSliderPosition();
+                this.updateIndicators();
+            }
+
+            goToSlide(index) {
+                this.currentSlideIndex = index;
+                this.updateSliderPosition();
+                this.updateIndicators();
+            }
+
+            startAutoSlide() {
+                this.sliderInterval = setInterval(() => {
+                    if (!this.isHovering) {
+                        this.nextSlide();
+                    }
+                }, 3000);
+            }
+
+            addHoverListeners() {
+                this.container.addEventListener('mouseenter', () => {
+                    this.isHovering = true;
+                });
+
+                this.container.addEventListener('mouseleave', () => {
+                    this.isHovering = false;
+                });
+            }
+        }
+
+        // Contoh penggunaan
+        const newsSlider = new NewsSlider('newsSlider');
+
+        // Menambahkan beberapa slide
+        newsSlider.addSlide({
+            image: './assets/about.png',
+            title: 'Berita Pertama: Inovasi Teknologi Terbaru',
+            author: 'John Doe',
+            date: '8 Desember 2024',
+            description: 'Perkembangan teknologi terbaru yang mengubah cara kita bekerja dan hidup.'
+        });
+
+        newsSlider.addSlide({
+            image: './assets/background.jpg',
+            title: 'Liputan Khusus: Perubahan Iklim Global',
+            author: 'Jane Smith', 
+            date: '7 Desember 2024',
+            description: 'Laporan mendalam tentang dampak perubahan iklim di berbagai belahan dunia.'
+        });
+    </script>
 
 
     <section class="about-section section-container">
@@ -355,7 +497,7 @@
                 <img src="./assets/about.png" alt="Pendidikan Jasmani" class="vertical-card-image">
             </div>
             <div class="vertical-card-content">
-                <p class="vertical-card-subheader">Tentang</p>
+                <p class="section-subheader">Tentang</p>
                 <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
                 <p class="vertical-card-description">
                     Program Studi Pendidikan Jasmani (Penjas) bertujuan mencetak tenaga pendidik dan profesional di
@@ -366,59 +508,8 @@
                 </p>
                 <button class="btn" role="button"><a href="/public/uploads/profil-dosen.html">Selengkapnya</a></button>
             </div>
-        </div>
+    </div>
     </section>
-
-    <script>
-    $(document).ready(function () {
-    const $carousel = $('.carousel');
-    const $items = $('.carousel-item');
-    const itemCount = $items.length;
-    let currentIndex = 0;
-    let autoSlide;
-
-    function showSlide(index) {
-        const offset = -index * 100; // Offset sesuai lebar item
-        $carousel.css('transform', `translateX(${offset}%)`);
-        currentIndex = index;
-    }
-
-    function nextSlide() {
-        const nextIndex = (currentIndex + 1) % itemCount;
-        showSlide(nextIndex);
-    }
-
-    function prevSlide() {
-        const prevIndex = (currentIndex - 1 + itemCount) % itemCount;
-        showSlide(prevIndex);
-    }
-
-    function startAutoSlide() {
-        autoSlide = setInterval(nextSlide, 3000);
-    }
-
-    function stopAutoSlide() {
-        clearInterval(autoSlide);
-    }
-
-    $('.carousel-btn.right').click(function () {
-        stopAutoSlide();
-        nextSlide();
-        startAutoSlide();
-    });
-
-    $('.carousel-btn.left').click(function () {
-        stopAutoSlide();
-        prevSlide();
-        startAutoSlide();
-    });
-
-    $carousel.hover(stopAutoSlide, startAutoSlide);
-
-    // Initialize carousel
-    startAutoSlide();
-    });
-</script>
 
     <section class="berita-section section-container">
         <!-- Left Section (Card Grid) -->
