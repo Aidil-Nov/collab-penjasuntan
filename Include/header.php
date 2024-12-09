@@ -98,6 +98,22 @@
         color: var(--text-dark);
     }
 
+    .highlight-news {
+        display: -webkit-box; /* Untuk mendukung pemotongan multi-line */
+        -webkit-line-clamp: 3; /* Tentukan jumlah baris yang ingin ditampilkan */
+        -webkit-box-orient: vertical; /* Membuat teks tetap vertikal */
+        overflow: hidden; /* Sembunyikan teks yang tidak muat */
+        text-overflow: ellipsis; /* Tampilkan "..." jika teks terpotong */  
+    }
+
+    .head-news {
+        display: -webkit-box; /* Untuk mendukung pemotongan multi-line */
+        -webkit-line-clamp: 2; /* Tentukan jumlah baris yang ingin ditampilkan */
+        -webkit-box-orient: vertical; /* Membuat teks tetap vertikal */
+        overflow: hidden; /* Sembunyikan teks yang tidak muat */
+        text-overflow: ellipsis; /* Tampilkan "..." jika teks terpotong */
+    }
+
     .btn {
         padding: 0.5rem 1rem;
         background-color: var(--primary-color-dark);
