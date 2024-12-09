@@ -43,7 +43,7 @@ if (isset($_POST['add'])) {
         $fileExtension = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
 
         if (in_array($fileExtension, $allowedExtensions)) {
-            $foto = 'uploads/' . time() . '_' . basename($_FILES['foto']['name']);
+            $foto = '../uploads/' . time() . '_' . basename($_FILES['foto']['name']);
             if (!move_uploaded_file($_FILES['foto']['tmp_name'], $foto)) {
                 echo "<script>alert('Gagal mengunggah file foto.');</script>";
             }

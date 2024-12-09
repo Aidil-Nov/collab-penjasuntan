@@ -1,6 +1,41 @@
-<?php include('../include/header.php');?>
+<?php include '../include/header.php';?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akademik | Akreditasi</title>
+    <style>
+        /* BAGIAN AKREDITASI IMAGE */
 
-<section class="akreditasi-section section-container">
+        .card-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        }
+
+        .card-image {
+        margin-top: 1rem;
+        padding: 10px;
+        width: 100%;
+        box-shadow: var(--shadow);
+        }
+
+        .card-image h3 {
+        text-align: center;
+        font-weight: 300;
+        }
+
+        .card-image img {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        width: 80%;
+        height: auto;
+        object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <section class="akreditasi-section section-container">
         <h1 class="section-subheader">Akreditasi</h1>
         <div class="card-grid">
             <div class="card-image">
@@ -23,34 +58,8 @@
             </div>
         </div>
     </section>
-    <style>
-        /* BAGIAN AKREDITASI IMAGE */
+</body>
+</html>
 
-.card-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
-.card-image {
-    margin-top: 1rem;
-    padding: 10px;
-    width: 100%;
-    box-shadow: var(--shadow);
-}
-
-.card-image h3 {
-    text-align: center;
-    font-weight: 300;
-}
-
-.card-image img {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    width: 80%;
-    height: auto;
-    object-fit: cover;
-}
-    </style>
 
 <?php include('../include/footer.php') ?>

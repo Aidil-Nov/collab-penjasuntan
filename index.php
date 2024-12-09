@@ -1,5 +1,6 @@
 <?php include './include/header.php'; ?>
 <?php include './Data/db_connect.php'; ?>
+
 <style>
 .section-container {
     max-width: var(--max-width);
@@ -495,8 +496,8 @@
 
     <!-- Fasility Section -->
     <section class="fasilitas-section section-container">
-        <h2 class="section-subheader">Fasilitas</h2>
-        <h1 class="section-header">Prodi</h1>
+        <h3 class="section-subheader">Fasilitas</h3>
+        <h2 class="section-header">Prodi</h2>
         <div class="facility-grid">
             <div class="facility-item">
                 <span><i class="fa-solid fa-mosque"></i></span>
@@ -531,10 +532,11 @@
     $sql = "SELECT foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 3";
     $result = $conn->query($sql);
     ?>
+    
     <!-- Berita Card Section -->
     <section class="berita-section section-container">
-        <h2 class="section-subheader">Berita</h2>
-        <h1 class="section-header">Pendidikan Jasmani</h1>
+        <h3 class="section-subheader">Berita</h3>
+        <h2 class="section-header">Pendidikan Jasmani</h2>
         <div class="card-grid">
             <?php
             if ($result->num_rows > 0) {
@@ -570,8 +572,7 @@
 
     <!-- Galeri Mahasiswa -->
     <section class="gallery-section section-container">
-        <h2 class="section-subheader">Galeri</h2>
-        <h1 class="section-header">Mahasiswa</h1>
+        <h3 class="section-subheader">Galeri Mahasiswa</h3>
         <div class="gallery-grid">
             <?php
             if ($result->num_rows > 0) {
@@ -589,4 +590,4 @@
         </div>
     </section>
 
-<?php include('./include/footer.php'); ?>
+<?php include './include/footer.php'; ?>

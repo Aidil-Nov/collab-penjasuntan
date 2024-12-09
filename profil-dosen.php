@@ -1,5 +1,121 @@
-<?php include('../include/header.php');?>
+<?php include './include/header.php';?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil | Profil Dosen</title>
+    <style>
+        /* Dosen */
+        .dosen-grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 2rem;
+        }
+        .dosen-grid {
+        display: grid;
+        gap: 20px;
+        justify-items: center;
+        align-items: center;
+        }
+        /* Grid pertama: satu card di tengah */
+        .dosen-grid-single {
+        grid-template-columns: 1fr;
+        justify-content: center;
+        }
+        /* Grid kedua: beberapa card */
+        .dosen-grid-multiple {
+        grid-template-columns: repeat(3, 1fr);
+        }
+        /* Card */
+        .dosen-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        width: 100%;
+        max-width: 300px;
 
+        }
+        .dosen-card:hover {
+        transform: translateY(-10px);
+        }
+        .dosen-card img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        }
+        .dosen-info {
+        padding: 10px;
+        font-size: 0.7rem;
+        font-weight: bold;
+        }
+        .vertical-card {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        align-items: center;
+        overflow: hidden;
+        padding: 1rem;
+        background: #ffffff;
+        border-radius: 5px;
+        box-shadow: var(--shadow);
+        }
+        .vertical-card-image-container {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 5px;
+        }
+        .vertical-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        }
+        .vertical-card-content {
+        display: block;
+        }
+        .vertical-card-subheader {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 0.5rem;
+        }
+        .vertical-card-header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        }
+        .vertical-card-description {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 1.5rem;
+        }
+        /* Responsiveness */
+
+        @media screen and (max-width: 1024px) {
+        .dosen-grid-multiple {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        }
+
+        @media screen and (max-width: 768px) {
+        .dosen-grid-multiple {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        }
+
+        @media screen and (max-width: 480px) {
+        .dosen-grid-multiple {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>
 <section class="about-section section-container">
         <div class="vertical-card">
             <div class="vertical-card-image-container">
@@ -15,6 +131,7 @@
             </div>
         </div>
     </section>
+    
     <section class="dosen-section section-container">
         <h1 class="section-subheader">Profil Dosen Prodi Penjas</h1>
         <p class="section-description-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit repellat, quia quis dolorum unde ad temporibus, similique cumque omnis velit est libero quos quae hic delectus doloremque reprehenderit nesciunt necessitatibus.</p>
@@ -101,138 +218,5 @@
         </div>
     </section>
 
-    <style>
-/* Grid container */
 
-.dosen-grid-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 2rem;
-}
-
-
-/* Grid umum */
-
-.dosen-grid {
-    display: grid;
-    gap: 20px;
-    justify-items: center;
-    align-items: center;
-}
-
-
-/* Grid pertama: satu card di tengah */
-
-.dosen-grid-single {
-    grid-template-columns: 1fr;
-    justify-content: center;
-}
-
-
-/* Grid kedua: beberapa card */
-
-.dosen-grid-multiple {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-
-/* Card */
-
-.dosen-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    width: 100%;
-    max-width: 300px;
-
-}
-
-.dosen-card:hover {
-    transform: translateY(-10px);
-}
-
-.dosen-card img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-}
-
-.dosen-info {
-    padding: 10px;
-    font-size: 0.7rem;
-    font-weight: bold;
-}
-
-.vertical-card {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    align-items: center;
-    overflow: hidden;
-    padding: 1rem;
-    background: #ffffff;
-    border-radius: 5px;
-    box-shadow: var(--shadow);
-}
-
-.vertical-card-image-container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 5px;
-}
-
-.vertical-card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.vertical-card-content {
-    display: block;
-}
-
-.vertical-card-subheader {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 0.5rem;
-}
-
-.vertical-card-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.vertical-card-description {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 1.5rem;
-}
-
-
-/* Responsiveness */
-
-@media screen and (max-width: 1024px) {
-    .dosen-grid-multiple {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .dosen-grid-multiple {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .dosen-grid-multiple {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-</style>
-
-<?php include('../include/footer.php') ?>
+<?php include './include/footer.php' ?>

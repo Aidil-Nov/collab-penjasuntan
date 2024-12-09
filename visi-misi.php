@@ -1,137 +1,68 @@
-<?php include('../include/header.php');?>
+<?php include './include/header.php';?>
+<?php include './Data/db_connect.php'; ?>
 
-<section class="visi-headline-section section-container">  
-        <div class="visi-misi-wrapper">
-            <div class="vision-mission-content">
-                <h1 class="section-subheader">Visi</h1>
-                <p>Unggul dan Bersaing Dalam Peradaban Melalui Pendidikan Jasmani Dengan Keragaman Budaya Lokal</p>
-                <br>
-                <h1 class="section-subheader">Misi</h1>
-                <p>Menyelenggarakan kegiatan pendidikan berdasarkan Kerangka Kualifikasi Nasional Indonesia agar menghasilkan tenaga pendidik dalam berbagai jenjang dan jenis pendidikan serta tenaga kependidikan yang mampu berpikir global dan berbudaya lokal.
-                    Melaksanakan penelitian dalam kajian Pendidikan Jasmani. Memberdayakan seluruh potensi yang dimiliki secara optimal, serta mendorong sivitas akademika untuk mengimplementasikan hasil penelitian dan gagasan sebagai bentuk responsif
-                    terhadap permasalahan yang ada di masyarakat.</p>
-            </div>
-        </div>
-        <div class="headline-wrapper">
-            <div class="headline-list">
-                <h2>Headline Berita</h2>
-                <div class="headline-item">
-                    <a href="">
-                        <h3>Judul Berita 1</h3>
-                        <p>20 November 2024</p>
-                    </a>
-                </div>
-                <div class="headline-item">
-                    <a href="">
-                        <h3>Judul Berita 1</h3>
-                        <p>20 November 2024</p>
-                    </a>
-                </div>
-                <div class="headline-item">
-                    <a href="">
-                        <h3>Judul Berita 1</h3>
-                        <p>20 November 2024</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="berita-section section-container">
-        <h2 class="section-subheader">Berita</h2>
-        <div class="card-grid">
-            <!-- Card 1 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita pertama untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita kedua untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="    " class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita ketiga untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visi dan Misi</title>
     <style>
-        /* BAGIAN VISI DAN MISI */
+        /* Visi dan Misi */
         .visi-headline-section {
             display: grid;
             grid-template-columns: 2fr 1fr;
             /* Visi lebih lebar, headline lebih kecil */
             gap: 2rem;
         }
+        
 
-
-        /* Visi dan Misi */
-
+        
         .visi-misi-wrapper {
             background-color: #fff;
             box-shadow: var(--shadow);
             padding: 2rem;
             border-radius: 8px;
         }
-
+        
         .vision-mission-content {
             text-align: justify;
             line-height: 1.8;
         }
-
-
+        
+        
         /* Headline Berita */
-
+        
         .headline-wrapper {
             background-color: #fff;
             box-shadow: var(--shadow);
             padding: 2rem;
             border-radius: 8px;
         }
-
+        
         .headline-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-
+        
         .headline-item {
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
         }
-
+        
         .headline-item:last-child {
             border-bottom: none;
         }
-
+        
         .headline-item p {
             margin: 0.3rem 0 0;
             font-size: 0.9rem;
             color: #666;
         }
-
-
-        /* BERITA */
-
+        /* Visi dan Misi End*/
+        
+        
+        /* Berita Card */
         .card-grid {
             display: grid;
             gap: 20px;
@@ -170,6 +101,12 @@
             font-size: 14px;
             color: #555;
         }
+
+        .card .btn {
+            margin-top: 1rem;
+        }
+        /* Berita Card End */
+
         /* Responsive Adjustments */
 
         /* Mobile Phones (up to 480px) */
@@ -244,8 +181,6 @@
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
-
-        /* Additional Responsive Tweaks */
         @media screen and (max-width: 1024px) {
             .section-container {
                 padding: 1rem;
@@ -265,5 +200,86 @@
         }
 
     </style>
+</head>
+<body>
+    <section class="visi-headline-section section-container">  
+            <div class="visi-misi-wrapper">
+                <div class="vision-mission-content">
+                    <h3 class="section-subheader">Visi</h3>
+                    <p>Unggul dan Bersaing Dalam Peradaban Melalui Pendidikan Jasmani Dengan Keragaman Budaya Lokal</p>
+                    <br>
+                    <h3 class="section-subheader">Misi</h3>
+                    <p>Menyelenggarakan kegiatan pendidikan berdasarkan Kerangka Kualifikasi Nasional Indonesia agar menghasilkan tenaga pendidik dalam berbagai jenjang dan jenis pendidikan serta tenaga kependidikan yang mampu berpikir global dan berbudaya lokal.
+                        Melaksanakan penelitian dalam kajian Pendidikan Jasmani. Memberdayakan seluruh potensi yang dimiliki secara optimal, serta mendorong sivitas akademika untuk mengimplementasikan hasil penelitian dan gagasan sebagai bentuk responsif
+                        terhadap permasalahan yang ada di masyarakat.</p>
+                </div>
+            </div>
+            <div class="headline-wrapper">
+                <div class="headline-list">
+                    <h2 class="section-header">Headline Berita</h2>
+                    <div class="headline-item">
+                        <a href="">
+                            <h3>Judul Berita 1</h3>
+                            <p>20 November 2024</p>
+                        </a>
+                    </div>
+                    <div class="headline-item">
+                        <a href="">
+                            <h3>Judul Berita 1</h3>
+                            <p>20 November 2024</p>
+                        </a>
+                    </div>
+                    <div class="headline-item">
+                        <a href="">
+                            <h3>Judul Berita 1</h3>
+                            <p>20 November 2024</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </section>
 
-<?php include('../include/footer.php') ?>
+    <?php // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
+    $sql = "SELECT foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 9";
+    $result = $conn->query($sql);
+    ?>
+    <section class="berita-section section-container">
+        <h3 class="section-subheader">Berita</h3>
+        <h2 class="section-header">Pendidikan Jasmani</h2>
+        <div class="card-grid">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Jalur gambar, diasumsikan folder uploads berada di direktori root server
+                    $imagePath = 'uploads/' . $row['foto'];
+                    ?>
+                    <!-- Card -->
+                    <div class="card">
+                        <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
+                        <div class="card-content">
+                            <h2 class="card-title head-news"><?= htmlspecialchars($row['judul']); ?></h2>
+                            <p class="meta-data section-description"><?= date('d M Y', strtotime($row['tanggal_upload'])); ?></p>
+                            <p class="card-description highlight-news" maxlength="10">
+                                <?= htmlspecialchars($row['highlight']); ?>
+                            </p>
+                            <button type="button" class="btn">Selengkapnya</button>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p>Tidak ada berita tersedia.</p>";
+            }
+            ?>
+        </div>
+    </section>
+
+    
+
+</body>
+</html>
+
+
+    
+
+<?php include './include/footer.php' ?>
