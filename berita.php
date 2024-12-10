@@ -1,4 +1,4 @@
-<?php include('./include/header.php'); ?>
+<?php include './include/header.php' ; ?>
 <?php include './Data/db_connect.php'; ?>
 <html lang="en">
 
@@ -7,75 +7,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Berita</title>
     <style>
-        .news-slider {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
+        /* Slider */
         .slider-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
+        position: relative;
+        width: 90%;
+        max-width: 1200px;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #fff;
+        margin: auto;
         }
 
-        .slide {
-            flex: 0 0 100%;
-            width: 100%;
+        .slider-container .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
         }
 
-        .slide-image {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
+        .slider-container .slider-card {
+        min-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
         }
 
-        .slide-content {
-            padding: 15px;
-            background-color: #f4f4f4;
+        .slider-container .slider-card img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+        border-bottom: 1px solid #ddd;
         }
 
-        .slide-navigation {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
+        .slider-container .content {
+        text-align: left;
+        padding: 10px 1rem;
         }
 
-        .nav-button {
-            background: rgba(0,0,0,0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
+        .slider-container h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        color: #333;
         }
 
-        .slide-indicators {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
+        .slider-container .date {
+        margin: 0 0 12px;
+        font-size: 14px;
+        color: #666;
         }
 
-        .slide-indicator {
-            width: 10px;
-            height: 10px;
-            background-color: #ccc;
-            border-radius: 50%;
-            cursor: pointer;
+        .slider-container .highlight {
+        font-size: 16px;
+        color: #444;
         }
 
-        .slide-indicator.active {
-            background-color: #333;
+        .slider-container button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        padding: 12px;
+        cursor: pointer;
+        z-index: 10;
         }
+
+        .slider-container button.prev {
+        left: 10px;
+        }
+
+        .slider-container button.next {
+        right: 10px;
+        }
+
+        .slider-container button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Slider End*/
 
         /* Responsive Media Queries */
-        @media screen and (max-width: 480px) {
+        /* @media screen and (max-width: 480px) {
             .slide-content {
                 padding: 10px;
             }
@@ -98,7 +110,7 @@
                 padding: 14px;
             }
         }
-    
+     */
     /* BAGIAN CARD VERTIKAL */
 
     .vertical-card {
@@ -122,8 +134,8 @@
 
     .vertical-card-image {
         width: 100%;
-        height: 100%;
         object-fit: cover;
+        aspect-ratio: 16/9;
     }
 
     .vertical-card-content {
@@ -315,242 +327,133 @@
 </head>
 
 <body>
-<div class="news-slider" id="newsSlider">
-        <!-- Slider akan diisi secara dinamis -->
-    </div>
+    <!-- Slider -->
+    <div class="slider-container">
+        <div class="slider">
+            <!-- Slider items akan di-load dari database menggunakan PHP -->
+            <?php
+            // Koneksi ke database
+            $conn = new mysqli('localhost', 'root', '', 'KampusDB');
 
+            if ($conn->connect_error) {
+                die("Koneksi gagal: " . $conn->connect_error);
+            }
+
+            // Query untuk mengambil berita terbaru
+            $sql = "SELECT foto, judul, tanggal_upload, highlight FROM berita ORDER BY tanggal_upload DESC LIMIT 5";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+                        <div class="slider-card">
+                            <img src="uploads/' . $row["foto"] . '" alt="News Image">
+                            <div class="content">
+                                <h2 class="head-highlight-news">' . htmlspecialchars($row["judul"]) . '</h2>
+                                <p class="date highlight-news">' . htmlspecialchars($row["tanggal_upload"]) . '</p>
+                                <p class="highlight">' . htmlspecialchars($row["highlight"]) . '</p>
+                            </div>
+                        </div>
+                    ';
+                }
+            } else {
+                echo "<p>Tidak ada berita ditemukan.</p>";
+            }
+            ?>
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
     <script>
-        class NewsSlider {
-            constructor(containerId) {
-                this.container = document.getElementById(containerId);
-                this.slides = [];
-                this.currentSlideIndex = 0;
-                this.isHovering = false;
-                this.sliderInterval = null;
+    let currentSlide = 0;
 
-                this.initSlider();
-            }
+    function moveSlide(direction) {
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slider-card');
+        const totalSlides = slides.length;
 
-            initSlider() {
-                this.createSliderContainer();
-                this.createNavButtons();
-                this.createIndicators();
-                this.startAutoSlide();
-                this.addHoverListeners();
-            }
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
 
-            createSliderContainer() {
-                const sliderContainer = document.createElement('div');
-                sliderContainer.classList.add('slider-container');
-                this.container.appendChild(sliderContainer);
-                this.sliderContainer = sliderContainer;
-            }
-
-            createNavButtons() {
-                const navContainer = document.createElement('div');
-                navContainer.classList.add('slide-navigation');
-
-                const prevButton = document.createElement('button');
-                prevButton.classList.add('nav-button', 'prev-button');
-                prevButton.innerHTML = '&lt;';
-                prevButton.addEventListener('click', () => this.prevSlide());
-
-                const nextButton = document.createElement('button');
-                nextButton.classList.add('nav-button', 'next-button');
-                nextButton.innerHTML = '&gt;';
-                nextButton.addEventListener('click', () => this.nextSlide());
-
-                navContainer.appendChild(prevButton);
-                navContainer.appendChild(nextButton);
-                this.container.appendChild(navContainer);
-            }
-
-            createIndicators() {
-                const indicatorContainer = document.createElement('div');
-                indicatorContainer.classList.add('slide-indicators');
-                this.container.appendChild(indicatorContainer);
-                this.indicatorContainer = indicatorContainer;
-            }
-
-            addSlide(slideData) {
-                this.slides.push(slideData);
-                this.renderSlides();
-                this.updateIndicators();
-            }
-
-            renderSlides() {
-                this.sliderContainer.innerHTML = '';
-                this.slides.forEach(slide => {
-                    const slideElement = document.createElement('div');
-                    slideElement.classList.add('slide');
-
-                    const image = document.createElement('img');
-                    image.src = slide.image;
-                    image.alt = slide.title;
-                    image.classList.add('slide-image');
-
-                    const content = document.createElement('div');
-                    content.classList.add('slide-content');
-
-                    const title = document.createElement('h2');
-                    title.textContent = slide.title;
-
-                    const metaInfo = document.createElement('div');
-                    metaInfo.innerHTML = `<span>${slide.author} | ${slide.date}</span>`;
-
-                    const description = document.createElement('p');
-                    description.textContent = slide.description;
-
-                    content.appendChild(title);
-                    content.appendChild(metaInfo);
-                    content.appendChild(description);
-
-                    slideElement.appendChild(image);
-                    slideElement.appendChild(content);
-
-                    this.sliderContainer.appendChild(slideElement);
-                });
-
-                this.updateSliderPosition();
-            }
-
-            updateSliderPosition() {
-                const offset = this.currentSlideIndex * -100;
-                this.sliderContainer.style.transform = `translateX(${offset}%)`;
-            }
-
-            updateIndicators() {
-                this.indicatorContainer.innerHTML = '';
-                this.slides.forEach((_, index) => {
-                    const indicator = document.createElement('button');
-                    indicator.classList.add('slide-indicator');
-                    if (index === this.currentSlideIndex) {
-                        indicator.classList.add('active');
-                    }
-                    indicator.addEventListener('click', () => this.goToSlide(index));
-                    this.indicatorContainer.appendChild(indicator);
-                });
-            }
-
-            nextSlide() {
-                this.currentSlideIndex = (this.currentSlideIndex + 1) % this.slides.length;
-                this.updateSliderPosition();
-                this.updateIndicators();
-            }
-
-            prevSlide() {
-                this.currentSlideIndex = (this.currentSlideIndex - 1 + this.slides.length) % this.slides.length;
-                this.updateSliderPosition();
-                this.updateIndicators();
-            }
-
-            goToSlide(index) {
-                this.currentSlideIndex = index;
-                this.updateSliderPosition();
-                this.updateIndicators();
-            }
-
-            startAutoSlide() {
-                this.sliderInterval = setInterval(() => {
-                    if (!this.isHovering) {
-                        this.nextSlide();
-                    }
-                }, 3000);
-            }
-
-            addHoverListeners() {
-                this.container.addEventListener('mouseenter', () => {
-                    this.isHovering = true;
-                });
-
-                this.container.addEventListener('mouseleave', () => {
-                    this.isHovering = false;
-                });
-            }
-        }
-
-        // Contoh penggunaan
-        const newsSlider = new NewsSlider('newsSlider');
-
-        // Menambahkan beberapa slide
-        newsSlider.addSlide({
-            image: './assets/about.png',
-            title: 'Berita Pertama: Inovasi Teknologi Terbaru',
-            author: 'John Doe',
-            date: '8 Desember 2024',
-            description: 'Perkembangan teknologi terbaru yang mengubah cara kita bekerja dan hidup.'
-        });
-
-        newsSlider.addSlide({
-            image: './assets/background.jpg',
-            title: 'Liputan Khusus: Perubahan Iklim Global',
-            author: 'Jane Smith', 
-            date: '7 Desember 2024',
-            description: 'Laporan mendalam tentang dampak perubahan iklim di berbagai belahan dunia.'
-        });
+    // Slider otomatis bergeser setiap 5 detik
+    setInterval(() => {
+        moveSlide(1);
+    }, 5000);
     </script>
+    <!-- Slider End -->
 
-
+    <!-- About -->
     <section class="about-section section-container">
-        <div class="vertical-card">
-            <div class="vertical-card-image-container">
-                <img src="./assets/about.png" alt="Pendidikan Jasmani" class="vertical-card-image">
-            </div>
-            <div class="vertical-card-content">
-                <p class="section-subheader">Tentang</p>
-                <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
-                <p class="vertical-card-description">
-                    Program Studi Pendidikan Jasmani (Penjas) bertujuan mencetak tenaga pendidik dan profesional di
-                    bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan
-                    jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
-                    dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup
-                    sehat dan pengembangan olahraga.
-                </p>
-                <button class="btn" role="button"><a href="/public/uploads/profil-dosen.html">Selengkapnya</a></button>
-            </div>
+        <?php // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
+            $sql = "SELECT foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 1";
+            $result = $conn->query($sql);
+            ?>
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Jalur gambar, diasumsikan folder uploads berada di direktori root server
+                $imagePath = 'uploads/' . $row['foto'];
+                ?>
+                <!-- Card -->
+                <div class="vertical-card">
+                    <div class="vertical-card-image-container">
+                        <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="vertical-card-image">
+                    </div>
+                    <div class="vertical-card-content">
+                        <h2 class="vertical-card-header head-news"><?= htmlspecialchars($row['judul']); ?></h2>
+                        <p class="meta-data section-description"><?= date('d M Y', strtotime($row['tanggal_upload'])); ?></p>
+                        <p class="vertical-card-description highlight-news" maxlength="10">
+                            <?= htmlspecialchars($row['highlight']); ?>
+                        </p>
+                        <button type="button" class="btn">Selengkapnya</button>
+                    </div>
+                </div>
+                <?php
+            }
+        } else {
+            echo "<p>Tidak ada berita tersedia.</p>";
+        }
+        ?>
     </div>
     </section>
+    <!-- About End -->
 
     <section class="berita-section section-container">
-        <!-- Left Section (Card Grid) -->
+        <h3 class="section-subheader">Berita</h3>
+        <h2 class="section-header">Pendidikan Jasmani</h2>
         <div class="card-grid">
-            <!-- Card 1 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita 1</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita pertama untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita 2</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita kedua untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita 3</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita ketiga untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
+            <?php // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
+            $sql = "SELECT foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 10";
+            $result = $conn->query($sql);
+            ?>
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Jalur gambar, diasumsikan folder uploads berada di direktori root server
+                    $imagePath = 'uploads/' . $row['foto'];
+                    ?>
+                    <!-- Card -->
+                    <div class="card">
+                        <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
+                        <div class="card-content">
+                            <h2 class="card-title head-news"><?= htmlspecialchars($row['judul']); ?></h2>
+                            <p class="meta-data section-description"><?= date('d M Y', strtotime($row['tanggal_upload'])); ?></p>
+                            <p class="card-description highlight-news" maxlength="10">
+                                <?= htmlspecialchars($row['highlight']); ?>
+                            </p>
+                            <button type="button" class="btn">Selengkapnya</button>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p>Tidak ada berita tersedia.</p>";
+            }
+            ?>
         </div>
     </section>
 </body>
 
 </html>
-
-
-<?php include('./include/footer.php') ?>
+<?php include './include/footer.php'  ?>
