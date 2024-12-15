@@ -438,9 +438,8 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr;
-                /* Satu kolom penuh */
-                gap: 5px;
+                grid-template-columns: repeat(2, 1fr);
+                /* Satu kolom penuh *
                 /* Jarak lebih kecil */
             }
 
@@ -548,9 +547,9 @@
                     <div class="card">
                         <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
                         <div class="card-content">
-                            <h2 class="card-title"><?= htmlspecialchars($row['judul']); ?></h2>
+                            <h2 class="card-title head-news"><?= htmlspecialchars($row['judul']); ?></h2>
                             <p class="meta-data section-description"><?= date('d M Y', strtotime($row['tanggal_upload'])); ?></p>
-                            <p class="card-description">
+                            <p class="card-description highlight-news">
                                 <?= htmlspecialchars($row['highlight']); ?>
                             </p>
                             <button type="button" class="btn">Selengkapnya</button>

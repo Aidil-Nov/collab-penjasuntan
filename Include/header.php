@@ -24,6 +24,10 @@
         color: var(--text-dark);
     }
 
+    h1,h2,h3{
+        font-weight: 500;
+    }
+
     html,
     body {
         scroll-behavior: smooth;
@@ -81,7 +85,7 @@
         max-width: 600px;
         margin-bottom: 1rem;
         font-size: 2.5rem;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 3rem;
         color: var(--text-dark);
     }

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Akademik | Kurikulum</title>
     <style>
         .kurikulum-section img {
             width: 100%;
@@ -105,18 +105,27 @@
                 max-height: 90vh;
             }
         }
-
-
     </style>
+
 </head>
 <body>
     <section class="kurikulum-section section-container">
-        <h3 class="section-subheader">Kurikulum</h3>
-        <h2 class="section-header">Prodi Pendidikan Jasmani</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed voluptates vel deserunt aliquid repellendus nulla inventore quidem officia, officiis et sapiente nam quibusdam, quae labore ab minima, magni qui tenetur?</p>
+        </section>
         
+        
+        <section class="about-section section-container">
+            <div class="vertical-card">
+                <div class="vertical-card-content">
+                    <h3 class="section-subheader">Kurikulum</h3>
+                    <h2 class="section-header">Prodi Pendidikan Jasmani</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed voluptates vel deserunt aliquid repellendus nulla inventore quidem officia, officiis et sapiente nam quibusdam, quae labore ab minima, magni qui tenetur?</p>
+                    <p class="vertical-card-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo consequatur nulla praesentium ex, explicabo laborum vitae modi. Dolor ducimus repudiandae sequi ipsam, aliquid repellendus deleniti corrupti quod optio magni. Reprehenderit?
+                    </p>
+                    <button id="showPDFBtn" class="btn">Tampilkan SK</button>
+                </div>
+            </div>
     </section>
-
     <section>
         <div id="pdf-container">
             <div class="pdf-wrapper">
@@ -170,7 +179,7 @@
             });
         });
     });
-    </script>
+</script>
 </body>
 </html>
 
