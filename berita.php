@@ -105,33 +105,6 @@
                 background-color: rgba(0, 0, 0, 0.8);
             }
 
-            /* Slider End*/
-
-            /* Responsive Media Queries */
-            /* @media screen and (max-width: 480px) {
-            .slide-content {
-                padding: 10px;
-            }
-            .slide-content h2 {
-                font-size: 16px;
-            }
-            .slide-content p {
-                font-size: 14px;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .slide-content {
-                padding: 12px;
-            }
-        }
-
-        @media screen and (max-width: 1024px) {
-            .slide-content {
-                padding: 14px;
-            }
-        }
-     */
             /* BAGIAN CARD VERTIKAL */
 
             .vertical-card {
