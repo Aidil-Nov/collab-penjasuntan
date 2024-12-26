@@ -1,495 +1,625 @@
-<?php include('./include/header.php'); ?>
+<?php include './include/header.php'; ?>
 <?php include './Data/db_connect.php'; ?>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berita</title>
-    <style>
-        /* Carousel Card */
-        .news-carousel {
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            margin: auto;
-            box-shadow: var(--shadow);
-        }
-
-        .news-carousel__wrapper {
-            display: flex;
-            width: 100%;
-            transition: transform 0.5s ease;
-        }
-
-        .news-card {
-            flex: 0 0 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .news-card__image {
-            width: 100%;
-            height: 600px;
-            object-fit: cover;
-        }
-
-        .news-card__content {
-            padding: 20px;
-            background-color: white;
-        }
-
-        .news-card__title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .news-card__metadata {
-            display: flex;
-            justify-content: space-between;
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        .news-card__description {
-            color: #555;
-            font-size: 1rem;
-        }
-
-        .carousel-controls {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-        }
-
-        .carousel-btn {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            z-index: 10;
-        }
-        /* Carousel End */
+<?php // Array untuk menyimpan ID berita yang sudah digunakan $excludedIds=[]; // Query untuk mengambil berita Slider
+    $sqlSlider="SELECT id, foto, judul, tanggal_upload, highlight FROM berita ORDER BY tanggal_upload DESC LIMIT 3" ;
+    $resultSlider=$conn->query($sqlSlider);
+    ?>
 
 
-        /* Responsive Breakpoints */
+    <!DOCTYPE html>
+    <html lang="en">
 
-        /* CARD VERTIKAL */
-        .vertical-card {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            align-items: center;
-            overflow: hidden;
-            padding: 1rem;
-            background: #ffffff;
-            border-radius: 5px;
-            box-shadow: var(--shadow);
-        }
-
-        .vertical-card-image-container {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            border-radius: 5px;
-        }
-
-        .vertical-card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .vertical-card-content {
-            display: block;
-        }
-
-        .vertical-card-subheader {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 0.5rem;
-        }
-
-        .vertical-card-header {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .vertical-card-description {
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 1.5rem;
-        }
-        /* Card Vertikal  */
-
-
-        /* Card Berita */
-
-        .berita-section {
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-
-        .card-content {
-            padding: 15px;
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .card-description {
-            font-size: 14px;
-            color: #555;
-        }
-
-        /* Card Berita End */
-
-        /* Responsivitas*/
-
-        @media screen and (max-width: 480px) {
-            .news-card__image {
-                height: 200px;
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Berita</title>
+        <style>
+            /* Slider */
+            .slider-card h2:hover,
+            .about-section h2:hover,
+            .card h2:hover {
+                text-decoration: underline;
+                cursor: pointer;
             }
 
-            .news-card__title {
-                font-size: 1.1rem;
+            .btn {
+                margin-top: 10px;
             }
 
-            .news-card__metadata {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media screen and (max-width: 1024px) {
-            .vertical-card {
-                grid-template-columns: 1fr;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
+            .slider-container {
+                position: relative;
+                width: 90%;
+                max-width: 1200px;
+                overflow: hidden;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background: #fff;
+                margin: auto;
+                margin-top: 1rem;
             }
 
-            .card-image {
-                height: 250px;
-                /* Menyesuaikan tinggi gambar agar lebih proporsional */
+            .slider-container .slider {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .slider-container .slider-card {
+                min-width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+            }
+
+            .slider-container .slider-card img {
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+                aspect-ratio: 16/9;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .slider-container .content {
+                text-align: left;
+                padding: 10px 1rem;
+            }
+
+            .slider-container h2 {
+                margin: 0 0 8px;
+                font-weight: 550;
+                max-width: 800px;
+                font-size: 2rem;
+            }
+
+            .slider-container .date {
+                margin: 0 0 12px;
+                font-size: 14px;
+                color: #666;
+            }
+
+            .slider-container .highlight {
+                font-size: 16px;
+                color: #444;
+            }
+
+            .slider-container button {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: rgba(0, 0, 0, 0.5);
+                color: #fff;
+                border: none;
+                padding: 12px;
+                cursor: pointer;
+                z-index: 10;
+            }
+
+            .slider-container button.prev {
+                left: 10px;
+            }
+
+            .slider-container button.next {
+                right: 10px;
+            }
+
+            .slider-container button:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            /* Slider End*/
+
+            /* Responsive Media Queries */
+            /* @media screen and (max-width: 480px) {
+            .slide-content {
+                padding: 10px;
+            }
+            .slide-content h2 {
+                font-size: 16px;
+            }
+            .slide-content p {
+                font-size: 14px;
             }
         }
 
         @media screen and (max-width: 768px) {
-            .vertical-card {
-                grid-template-columns: 1fr;
-            }
-
-            .vertical-card-header {
-                font-size: 20px;
-            }
-
-            .vertical-card-description {
-                font-size: 13px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-                /* Menampilkan satu kolom penuh */
-            }
-
-            .card-image {
-                height: 220px;
-                /* Menyesuaikan tinggi gambar */
-            }
-
-            .card-content {
-                padding: 10px;
-                /* Mengurangi padding untuk layar kecil */
-            }
-
-            .card-title {
-                font-size: 16px;
-                /* Ukuran font lebih kecil */
-            }
-
-            .card-description {
-                font-size: 13px;
-                /* Ukuran font deskripsi lebih kecil */
-            }
-
-            .card-grid {
-                grid-template-columns: repeat(2, 1fr);
-                /* 2 kolom untuk card */
+            .slide-content {
+                padding: 12px;
             }
         }
 
-        @media screen and (max-width: 480px) {
+        @media screen and (max-width: 1024px) {
+            .slide-content {
+                padding: 14px;
+            }
+        }
+     */
+            /* BAGIAN CARD VERTIKAL */
+
             .vertical-card {
-                grid-template-columns: 1fr;
-                padding: 0.5rem;
+                display: grid;
+                gap: 1rem;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                align-items: center;
+                overflow: hidden;
+                padding: 1rem;
+                background: #ffffff;
+                border-radius: 5px;
+                box-shadow: var(--shadow);
+            }
+
+            .vertical-card-image-container {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                border-radius: 5px;
+            }
+
+            .vertical-card-image {
+                width: 100%;
+                object-fit: cover;
+                aspect-ratio: 16/9;
+            }
+
+            .vertical-card-content {
+                display: block;
+            }
+
+            .vertical-card-subheader {
+                font-size: 16px;
+                color: #555;
+                margin-bottom: 0.5rem;
             }
 
             .vertical-card-header {
-                font-size: 18px;
+                font-size: 24px;
+                margin-bottom: 1rem;
             }
 
             .vertical-card-description {
-                font-size: 12px;
+                font-size: 14px;
+                color: #333;
+                margin-bottom: 1.5rem;
             }
 
-            .vertical-card-button {
-                padding: 0.4rem 0.8rem;
-                font-size: 14px;
+
+            /* BAGIAN CARD DIBAWAH VERTIKAL */
+
+
+            /* BERITA */
+
+            .berita-section {
+                margin: 0 auto;
+                padding: 20px;
             }
 
             .card-grid {
-                grid-template-columns: 1fr;
-                /* Tetap satu kolom */
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
             }
 
             .card {
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                /* Mengurangi bayangan */
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: 0.4s ease-in-out;
+            }
+
+            .card:hover {
+                transform: scale(1.04);
             }
 
             .card-image {
-                height: 180px;
-                /* Gambar lebih kecil untuk layar sempit */
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                transform: scale(1);
+                transition: ease-in;
+            }
+
+
+            .card-content {
+                padding: 15px;
             }
 
             .card-title {
-                font-size: 15px;
-                /* Ukuran font lebih kecil */
+                font-size: 18px;
+                margin-bottom: 10px;
             }
 
             .card-description {
-                font-size: 12px;
-                /* Ukuran font deskripsi lebih kecil */
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-                /* 1 kolom untuk card */
-            }
-
-            .news-title {
                 font-size: 14px;
+                color: #555;
             }
 
-            .news-date {
-                font-size: 12px;
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+                gap: 5px;
             }
 
-            .card-title {
-                font-size: 16px;
+            .pagination-item,
+            .pagination-arrow {
+                margin: 0;
+                padding: 10px 15px;
+                text-decoration: none;
+                color: #333;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+                font-weight: bold;
             }
 
-            .card-description {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
-
-
-<body>
-    <section class="news-carousel">
-        <div class="news-carousel__container">
-            <div class="news-carousel__wrapper">
-                <!-- News cards akan dirender oleh JavaScript -->
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn carousel-btn-prev"> &#10094;</button>
-                <button class="carousel-btn carousel-btn-next"> &#10095;</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Carousel Berhasil -->
-    <?php
-    // Query untuk mengambil berita
-    $sql = "SELECT judul AS title, foto AS image, DATE_FORMAT(tanggal_upload, '%d %M %Y') AS date, 'Berita' AS category, highlight AS description FROM berita ORDER BY tanggal_upload DESC LIMIT 10";
-    $result = $conn->query($sql);
-
-    // Siapkan data untuk JavaScript
-    $newsData = [];
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $row['image'] = 'uploads/' . $row['image']; // Tambahkan jalur folder uploads
-            $newsData[] = $row;
-        }
-    }
-
-    // Encode data menjadi JSON
-    $newsDataJson = json_encode($newsData);
-
-    // Tutup koneksi
-    $conn->close();
-    ?>
-
-    <script>
-        // Ambil data dari PHP
-        const newsData = <?php echo $newsDataJson; ?>;
-
-        // Definisi class NewsCarousel
-        class NewsCarousel {
-            constructor(data) {
-                this.data = data;
-                this.currentIndex = 0;
-                this.wrapper = document.querySelector('.news-carousel__wrapper');
-                this.prevBtn = document.querySelector('.carousel-btn-prev');
-                this.nextBtn = document.querySelector('.carousel-btn-next');
-
-                this.renderCards();
-                this.addEventListeners();
-                this.startAutoPlay();
+            .pagination-item:hover,
+            .pagination-arrow:hover {
+                background-color: var(--primary-color-dark);
+                color: #fff;
+                box-shadow: var(--shadow);
+                cursor: pointer;
             }
 
-            renderCards() {
-                this.wrapper.innerHTML = this.data.map(news => `
-                    <div class="news-card">
-                        <img src="${news.image}" alt="Gambar Berita" class="news-card__image">
-                        <div class="news-card__content">
-                            <h2 class="news-card__title">${news.title}</h2>
-                            <div class="news-card__metadata">
-                                <span>${news.date}</span>
-                                <span>${news.category}</span>
+            .pagination-item.active {
+                background-color: var(--primary-color);
+                color: #fff;
+                box-shadow: var(--shadow);
+                pointer-events: none;
+            }
+
+            .pagination-arrow {
+                font-size: 1.2rem;
+            }
+
+            /* BERITA END */
+
+            /* Responsivitas slider*/
+
+            @media screen and (max-width: 768px) {
+                .vertical-card {
+                    grid-template-columns: 1fr;
+                }
+
+                .vertical-card-header {
+                    font-size: 20px;
+                }
+
+                .vertical-card-description {
+                    font-size: 13px;
+                }
+
+                .card-grid {
+                    grid-template-columns: 1fr;
+                    /* Menampilkan satu kolom penuh */
+                }
+
+                .card-image {
+                    height: 220px;
+                    /* Menyesuaikan tinggi gambar */
+                }
+
+                .card-content {
+                    padding: 10px;
+                    /* Mengurangi padding untuk layar kecil */
+                }
+
+                .card-title {
+                    font-size: 16px;
+                    /* Ukuran font lebih kecil */
+                }
+
+                .card-description {
+                    font-size: 13px;
+                    /* Ukuran font deskripsi lebih kecil */
+                }
+
+                .card-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    /* 2 kolom untuk card */
+                }
+            }
+
+            @media screen and (max-width: 480px) {
+                .vertical-card {
+                    grid-template-columns: 1fr;
+                    padding: 0.5rem;
+                }
+
+                .vertical-card-header {
+                    font-size: 18px;
+                }
+
+                .vertical-card-description {
+                    font-size: 12px;
+                }
+
+                .vertical-card-button {
+                    padding: 0.4rem 0.8rem;
+                    font-size: 14px;
+                }
+
+                .card-grid {
+                    grid-template-columns: 1fr;
+                    /* Tetap satu kolom */
+                }
+
+                .card {
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    /* Mengurangi bayangan */
+                }
+
+                .card-image {
+                    height: 180px;
+                    /* Gambar lebih kecil untuk layar sempit */
+                }
+
+                .card-title {
+                    font-size: 15px;
+                    /* Ukuran font lebih kecil */
+                }
+
+                .card-description {
+                    font-size: 12px;
+                    /* Ukuran font deskripsi lebih kecil */
+                }
+
+                .card-grid {
+                    grid-template-columns: 1fr;
+                    /* 1 kolom untuk card */
+                }
+
+                .news-title {
+                    font-size: 14px;
+                }
+
+                .news-date {
+                    font-size: 12px;
+                }
+
+                .card-title {
+                    font-size: 16px;
+                }
+
+                .card-description {
+                    font-size: 12px;
+                }
+
+                .slider-container {
+                    margin-top: 0;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Slider -->
+        <section class="slider-container">
+            <div class="slider">
+                <?php
+                if ($resultSlider->num_rows > 0) {
+                    while ($rowSlider = $resultSlider->fetch_assoc()) {
+                        $excludedIds[] = $rowSlider['id']; // Simpan ID ke array
+                
+                        // Tampilkan berita slider
+                        echo '
+                        <div class="slider-card">
+                            <img src="uploads/' . htmlspecialchars($rowSlider["foto"]) . '" alt="News Image">
+                            <div class="content">
+                                <h2 class="section-header head-news">' . htmlspecialchars($rowSlider["judul"]) . '</h2>
+                                <p class="date">' . htmlspecialchars($rowSlider["tanggal_upload"]) . '</p>
+                                <p class="highlight highlight-news">' . htmlspecialchars($rowSlider["highlight"]) . '</p>
                             </div>
-                            <p class="news-card__description">${news.description}</p>
+                        </div>
+                    ';
+                    }
+                } else {
+                    echo "<p>Tidak ada berita ditemukan.</p>";
+                }
+                ?>
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </section>
+        <!-- Slider End -->
+
+        <!-- About Penjas -->
+        <section class="about-section section-container">
+            <h3 class="section-subheader">Berita Terbaru</h3>
+            <?php // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
+            // About Section Ambil 1 berita terbaru yang tidak termasuk di slider
+            $sqlAbout = "SELECT id, foto, judul, tanggal_upload, highlight FROM berita ORDER BY tanggal_upload DESC LIMIT 1";
+            $resultAbout = $conn->query($sqlAbout);
+            if ($resultAbout->num_rows > 0) {
+                while ($rowAbout = $resultAbout->fetch_assoc()) {
+                    $excludedIds[] = $rowAbout['id']; // Tambahkan ID ke array
+            
+                    // Tampilkan berita about
+                    echo '
+                    <div class="vertical-card">
+                        <div class="vertical-card-image-container">
+                            <img src="uploads/' . htmlspecialchars($rowAbout["foto"]) . '" alt="Gambar Berita" class="vertical-card-image">
+                        </div>
+                        <div class="vertical-card-content">
+                            <h2 class="vertical-card-header head-news">' . htmlspecialchars($rowAbout["judul"]) . '</h2>
+                            <p class="meta-data section-description">' . date('d M Y', strtotime($rowAbout["tanggal_upload"])) . '</p>
+                            <p class="vertical-card-description highlight-news">' . htmlspecialchars($rowAbout["highlight"]) . '</p>
+                            <button type="button" class="btn">Selengkapnya</button>
                         </div>
                     </div>
-                `).join('');
-            }
-
-            addEventListeners() {
-                this.prevBtn.addEventListener('click', () => this.prev());
-                this.nextBtn.addEventListener('click', () => this.next());
-            }
-
-            next() {
-                this.currentIndex++;
-                if (this.currentIndex >= this.data.length) {
-                    this.currentIndex = 0;
+                ';
                 }
-                this.updateCarousel();
+            } else {
+                echo "<p>Tidak ada berita tersedia.</p>";
             }
+            ?>
+        </section>
+        <!-- About Penjas End -->
+         
+        <!-- Berita Card Section -->
+        <section class="berita-section section-container">
+            <?php
+            $limit = 6;
 
-            prev() {
-                this.currentIndex--;
-                if (this.currentIndex < 0) {
-                    this.currentIndex = this.data.length - 1;
+            // Ambil halaman saat ini dari parameter URL (default ke 1)
+            $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+            $page = max(1, $page); // Pastikan minimal halaman adalah 1
+            
+            // Hitung offset untuk query SQL
+            $offset = ($page - 1) * $limit;
+
+            // Query untuk mengambil berita dengan batasan pagination
+            $sqlCard = "SELECT id, foto, judul, highlight, tanggal_upload
+            FROM berita
+            WHERE id NOT IN (" . implode(',', $excludedIds) . ")
+            ORDER BY tanggal_upload DESC
+            LIMIT $limit OFFSET $offset";
+            $resultCard = $conn->query($sqlCard);
+
+            // Hitung total berita
+            $totalSql = "SELECT COUNT(*) AS total FROM berita WHERE id NOT IN (" . implode(',', $excludedIds) . ")";
+            $totalResult = $conn->query($totalSql);
+            $totalRow = $totalResult->fetch_assoc();
+            $totalBerita = $totalRow['total'];
+
+            // Hitung jumlah halaman
+            $totalPages = ceil($totalBerita / $limit);
+            ?>
+            <h3 class="section-subheader">Berita</h3>
+            <h2 class="section-header">Pendidikan Jasmani</h2>
+            <div class="card-grid">
+                <?php
+                if ($resultCard->num_rows > 0) {
+                    while ($rowCard = $resultCard->fetch_assoc()) {
+                        $excludedIds[] = $rowCard['id']; // Tambahkan ID ke array
+                        echo '
+                    <div class="card">
+                        <img src="uploads/' . htmlspecialchars($rowCard["foto"]) . '" alt="Gambar Berita" class="card-image">
+                        <div class="card-content">
+                            <h2 class="card-title head-news">' . htmlspecialchars($rowCard["judul"]) . '</h2>
+                            <p class="meta-data section-description">' . date('d M Y', strtotime($rowCard["tanggal_upload"])) . '</p>
+                            <p class="card-description highlight-news">' . htmlspecialchars($rowCard["highlight"]) . '</p>
+                            <button type="button" class="btn">Selengkapnya</button>
+                        </div>
+                    </div>
+                ';
+                    }
+                } else {
+                    echo "<p>Tidak ada berita tersedia.</p>";
                 }
-                this.updateCarousel();
+                ?>
+            </div>
+            <!-- Pagination -->
+            <div class="pagination">
+                <?php
+                if ($totalPages > 1) {
+                    // Tombol panah kiri
+                    if ($page > 1) {
+                        echo '<a href="?page=' . ($page - 1) . '" class="pagination-arrow">&laquo;</a>';
+                    } else {
+                        echo '<a href="?page=' . ($page + 1) . '" class="pagination-arrow">&laquo;</a>';
+                    }
+
+                    // Tampilkan halaman
+                    for ($i = 1; $i <= $totalPages; $i++) {
+                        if ($i == $page) {
+                            echo '<span class="pagination-item active">' . $i . '</span>';
+                        } else {
+                            echo '<a href="?page=' . $i . '" class="pagination-item">' . $i . '</a>';
+                        }
+                    }
+
+                    // Tombol panah kanan
+                    if ($page < $totalPages) {
+                        echo '<a href="?page=' . ($page + 1) . '" class="pagination-arrow">&raquo;</a>';
+                    } else {
+                        echo '<a href="?page=' . ($page - 1) . '" class="pagination-arrow">&laquo;</a>';
+                    }
+                }
+                ?>
+            </div>
+            <!-- Pagination End -->
+        </section>
+        <!-- Berita Card End -->
+
+        <script>
+            // Slider
+            let currentSlide = 0;
+            let autoSlideInterval;
+
+            function moveSlide(direction) {
+                const slider = document.querySelector('.slider');
+                const slides = document.querySelectorAll('.slider-card');
+                const totalSlides = slides.length;
+
+                currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
 
-            updateCarousel() {
-                const offset = -this.currentIndex * 100;
-                this.wrapper.style.transform = `translateX(${offset}%)`;
-            }
-
-            startAutoPlay() {
-                this.autoPlayInterval = setInterval(() => {
-                    this.next();
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    moveSlide(1);
                 }, 5000);
             }
-        }
-        // Inisialisasi Carousel
-        new NewsCarousel(newsData);
-    </script>
 
-    <section class="about-section section-container">
-        <div class="vertical-card">
-            <div class="vertical-card-image-container">
-                <img src="./assets/about.png" alt="Pendidikan Jasmani" class="vertical-card-image">
-            </div>
-            <div class="vertical-card-content">
-                <p class="vertical-card-subheader">Tentang</p>
-                <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
-                <p class="vertical-card-description">
-                    Program Studi Pendidikan Jasmani (Penjas) bertujuan mencetak tenaga pendidik dan profesional di
-                    bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan
-                    jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
-                    dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup
-                    sehat dan pengembangan olahraga.
-                </p>
-                <button class="btn" role="button"><a href="/public/uploads/profil-dosen.html">Selengkapnya</a></button>
-            </div>
-        </div>
-    </section>
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
 
-    <section class="berita-section section-container">
-        <!-- Left Section (Card Grid) -->
-        <div class="card-grid">
-            <!-- Card 1 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita 1</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita pertama untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
+            // Memulai slider otomatis
+            startAutoSlide();
 
-            <!-- Card 2 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita 2</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita kedua untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
+            // Menambahkan event listener untuk hover
+            const sliderContainer = document.querySelector('.slider-container');
 
-            <!-- Card 3 -->
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="" class="card-image">
-                <div class="card-content">
-                    <h2 class="card-title">Judul Berita 3</h2>
-                    <p class="card-description">
-                        Deskripsi singkat berita ketiga untuk memberikan informasi kepada pembaca.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-</body>
+            sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+            sliderContainer.addEventListener('mouseleave', startAutoSlide);
 
-</html>
+            // pagination
+            document.addEventListener('DOMContentLoaded', () => {
+                const paginationLinks = document.querySelectorAll('.pagination a');
 
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', event => {
+                        event.preventDefault(); // Mencegah refresh halaman
 
-<?php include('./include/footer.php') ?>
+                        const url = event.target.href;
+
+                        // Fetch data dari URL pagination
+                        fetch(url)
+                            .then(response => response.text())
+                            .then(data => {
+                                const parser = new DOMParser();
+                                const htmlDoc = parser.parseFromString(data, 'text/html');
+                                const newCards = htmlDoc.querySelector('.card-grid').innerHTML;
+                                const newPagination = htmlDoc.querySelector('.pagination').innerHTML;
+
+                                // Update konten card-grid dan pagination
+                                document.querySelector('.card-grid').innerHTML = newCards;
+                                document.querySelector('.pagination').innerHTML = newPagination;
+
+                                // Tambahkan kembali event listener ke link baru
+                                document.querySelectorAll('.pagination a').forEach(newLink => {
+                                    newLink.addEventListener('click', event => {
+                                        event.preventDefault();
+                                        const newUrl = event.target.href;
+                                        fetch(newUrl)
+                                            .then(response => response.text())
+                                            .then(newData => {
+                                                const newDoc = parser.parseFromString(newData, 'text/html');
+                                                const updatedCards = newDoc.querySelector('.card-grid').innerHTML;
+                                                const updatedPagination = newDoc.querySelector('.pagination').innerHTML;
+                                                document.querySelector('.card-grid').innerHTML = updatedCards;
+                                                document.querySelector('.pagination').innerHTML = updatedPagination;
+                                            });
+                                    });
+                                });
+                            });
+                    });
+                });
+            });
+        </script>
+    </body>
+
+    </html>
+
+    <?php include './include/footer.php' ?>
