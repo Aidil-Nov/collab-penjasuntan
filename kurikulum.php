@@ -22,6 +22,8 @@
         #showPDFBtn {
             border: none;
             cursor: pointer;
+            margin: 0;
+            margin-top: 1rem ;
         }
 
         #pdf-container {
@@ -145,7 +147,7 @@
                                 Ganti URL di bawah dengan URL PDF yang ingin Anda tampilkan 
                                 Pastikan URL PDF dapat diakses secara publik
                                 -->
-                        <iframe src="./assets/SK.pdf" type="application/pdf" width="100%" height="100%">
+                        <iframe src="/assets/SK.pdf" type="application/pdf" width="100%" height="100%">
                             Browser Anda tidak mendukung tampilan PDF.
                             <a href="">Unduh PDF</a>
                         </iframe>
