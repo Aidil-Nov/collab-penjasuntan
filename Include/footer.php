@@ -7,46 +7,6 @@
     <link rel="stylesheet" href="../css/style.css"> <!-- Pastikan file CSS utama -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet"> <!-- CDN untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <footer class="footer">
-        <div class="footer-container">
-            <!-- Logo Section -->
-            <div class="footer-logos">
-                <img src="./assets/logo-untan.png" alt="Logo Universitas 1">
-                <img src="./assets/Logo_Kampus_Merdeka_Kemendikbud.png" alt="Logo Universitas 2">
-                <img src="./assets/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Universitas 3">
-            </div>
-
-            <!-- Address Section -->
-            <div class="footer-address">
-                <h3>Alamat Kami</h3>
-                <p><i class="fa-solid fa-location-dot"></i> Jl. Profesor Dokter H. Hadari Nawawi</p>
-                <p>Kota Universitas</p>
-                <p>Bansir Laut, Kec. Pontianak Tenggara, Kota Pontianak,</p>
-                <p>Kalimantan Barat 78115</p>
-                <p>Indonesia</p>
-            </div>
-
-            <!-- Contact Section -->
-            <div class="footer-contact">
-                <h3>Kontak</h3>
-                <a href="tel:+6281234567890">Telp: +62 812 3456 7890</a>    
-                <a href="mailto:penjas@untan.ac.id">Email: penjas@untan.ac.id</a>
-                <div class="social-media">
-                    <a href="https://www.instagram.com/penjas.untan_official?igsh=MXdweHg3MzdiNjB1Ng=="><i class="ri-instagram-line"></i> Instagram</a>
-                    <a href="https://youtube.com/@penjasuntan3826?si=dIo2ZsZjrkm_-qr4"><i class="ri-youtube-line"></i> Youtube</a>
-                </div>
-            </div>
-
-            <!-- Map Section -->
-            <div class="footer-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d392.8774071153481!2d109.344065!3d-0.059338!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d5990f4cd7fef%3A0x1ca9fe3658d81f3b!2sFakultas%20Keguruan%20dan%20Ilmu%20Pendidikan%20(FKIP)!5e1!3m2!1sid!2sid!4v1732271869284!5m2!1sid!2sid"
-                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-    </footer>
-
     <style>
         /* Footer Styles */
         :root {
@@ -149,6 +109,44 @@
             }
         }
     </style>
-    <script src="./js/main.js"></script> <!-- Pastikan file JS tersedia -->
+</head>
+<body>
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Logo Section -->
+            <div class="footer-logos">
+                <img src="./assets/logo-untan.png" alt="Logo Universitas 1">
+                <img src="./assets/Logo_Kampus_Merdeka_Kemendikbud.png" alt="Logo Universitas 2">
+                <img src="./assets/Logo-Tut-Wuri-Handayani-PNG-Warna.png" alt="Logo Universitas 3">
+            </div>
+
+            <!-- Address Section -->
+            <div class="footer-address">
+                <h3>Alamat Kami</h3>
+                <p><i class="fa-solid fa-location-dot"></i> Jl. Profesor Dokter H. Hadari Nawawi</p>
+                <p>Kota Universitas</p>
+                <p>Bansir Laut, Kec. Pontianak Tenggara, Kota Pontianak,</p>
+                <p>Kalimantan Barat 78115</p>
+                <p>Indonesia</p>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-contact">
+                <h3>Kontak</h3>
+                <a href="tel:+6281234567890">Telp: +62 812 3456 7890</a>    
+                <a href="mailto:penjas@untan.ac.id">Email: penjas@untan.ac.id</a>
+                <div class="social-media">
+                    <a href="https://www.instagram.com/penjas.untan_official?igsh=MXdweHg3MzdiNjB1Ng=="><i class="ri-instagram-line"></i> Instagram</a>
+                    <a href="https://youtube.com/@penjasuntan3826?si=dIo2ZsZjrkm_-qr4"><i class="ri-youtube-line"></i> Youtube</a>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="footer-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d392.8774071153481!2d109.344065!3d-0.059338!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d5990f4cd7fef%3A0x1ca9fe3658d81f3b!2sFakultas%20Keguruan%20dan%20Ilmu%20Pendidikan%20(FKIP)!5e1!3m2!1sid!2sid!4v1732271869284!5m2!1sid!2sid"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
