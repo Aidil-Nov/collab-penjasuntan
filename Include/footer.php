@@ -18,6 +18,8 @@
             background-color: #282828;
             color: var(--white);
             padding: 3rem 2rem;
+            bottom: 0;
+            position: relative;
         }
 
         .footer-container {

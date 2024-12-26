@@ -1,4 +1,4 @@
-<?php include('../include/header.php');?>
+<?php include('./include/header.php');?>
 
 <section class="table-section section-container">    
     <h2 class="section-subheader">Penelitian</h2>
@@ -8,7 +8,7 @@
                 <tr>
                     <th id="no" class="t-header">No</th>
                     <th id="name" class="t-header">Judul</th>
-                    <th id="jabatan" class="t-header">Tahun</th>
+                    <th id="tahun" class="t-header">Tahun</th>
                 </tr>
             </thead>
             <tbody>
@@ -123,4 +123,4 @@ td {
 
 </style>
 
-<?php include('../include/footer.php') ?>
+<?php include('./include/footer.php') ?>
