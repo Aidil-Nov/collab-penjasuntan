@@ -110,7 +110,7 @@
         .highlight-news {
             display: -webkit-box;
             /* Untuk mendukung pemotongan multi-line */
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             /* Tentukan jumlah baris yang ingin ditampilkan */
             -webkit-box-orient: vertical;
             /* Membuat teks tetap vertikal */
