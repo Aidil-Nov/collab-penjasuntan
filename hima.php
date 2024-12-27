@@ -2,6 +2,7 @@
 <?php include './Data/db_connect.php'; ?>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,7 +44,6 @@
 
         .vertical-card-header {
             font-size: 24px;
-            font-weight: bold;
             margin-bottom: 1rem;
         }
 
@@ -95,6 +95,7 @@
 
         .btn {
             padding: 8px 16px;
+            margin: 0;
         }
 
         .pdf-content {
@@ -180,7 +181,6 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             transition: all 0.3s ease;
-            font-weight: bold;
             cursor: pointer;
         }
 
@@ -394,23 +394,13 @@
 
     <!-- PDF -->
     <section>
-        <div id="pdf-container">
-            <div class="pdf-wrapper">
-                <div class="button-close">
-                    <button class="btn" id="closePDFBtn">Tutup PDF</button>
-                </div>
-                <div class="pdf-content">
-                    <!--
-                        Ganti URL di bawah dengan URL PDF yang ingin Anda tampilkan 
-                        Pastikan URL PDF dapat diakses secara publik
-                    -->
-                    <iframe src="./assets/SK.pdf" type="application/pdf" width="100%" height="100%">
-                        Browser Anda tidak mendukung tampilan PDF.
-                        <a href="">Unduh PDF</a>
-                    </iframe>
-                </div>
-            </div>
+    
+        <div id="pdf-container" style="display: none;">
+        <div class="pdf-wrapper">
+            <button id="closePDFBtn" class="btn">Tutup PDF</button>
+            <iframe src="./assets/SK.pdf" width="100%" height="500px"></iframe>
         </div>
+    </div>
     </section>
     <!-- PDF END -->
 
@@ -479,7 +469,7 @@
 
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                     <a href="?page=<?php echo $i; ?>" <?php if ($i == $page)
-                           echo 'class="pagination-item active"'; ?>><?php echo $i; ?></a>
+                    echo 'class="pagination-item active"'; ?>><?php echo $i; ?></a>
                 <?php endfor; ?>
 
                 <?php if ($page < $total_pages): ?>
@@ -491,42 +481,32 @@
     </section>
     <!-- Data Mahasiswa Hima END -->
 
-</body>
 
-<script>
-    // Mendapatkan referensi tombol dan kontainer PDF
-    const showPDFBtn = document.getElementById("showPDFBtn");
-    const pdfContainer = document.getElementById("pdf-container");
-    const closePDFBtn = document.getElementById("closePDFBtn");
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+        const showPDFBtn = document.getElementById("showPDFBtn");
+        const pdfContainer = document.getElementById("pdf-container");
+        const closePDFBtn = document.getElementById("closePDFBtn");
 
-    // Menambahkan event listener untuk tombol tampilkan PDF
-    showPDFBtn.addEventListener("click", function () {
-        pdfContainer.style.display = "flex"; // Menampilkan PDF
-    });
+        // Menambahkan event listener untuk tombol tampilkan PDF
+        showPDFBtn.addEventListener("click", function () {
+            pdfContainer.style.display = "flex"; // Menampilkan PDF
+        });
 
-    // Menambahkan event listener untuk tombol tutup PDF
-    closePDFBtn.addEventListener("click", function () {
-        pdfContainer.style.display = "none"; // Menyembunyikan PDF
-    });
+        // Menambahkan event listener untuk tombol tutup PDF
+        closePDFBtn.addEventListener("click", function () {
+            pdfContainer.style.display = "none"; // Menyembunyikan PDF
+        });
 
-    // Menutup PDF saat mengklik area di luar modal
-    pdfContainer.addEventListener("click", function (event) {
-        if (event.target === pdfContainer) {
-            pdfContainer.style.display = "none";
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const navLinks = document.querySelectorAll(".nav-link a");
-
-        navLinks.forEach(link => {
-            link.addEventListener("click", function () {
-                navLinks.forEach(nav => nav.classList.remove("active"));
-                this.classList.add("active");
-            });
+        // Menutup PDF saat mengklik area di luar modal
+        pdfContainer.addEventListener("click", function (event) {
+            if (event.target === pdfContainer) {
+                pdfContainer.style.display = "none";
+            }
         });
     });
-</script>
+    </script>
+</body>
 
 </html>
 
