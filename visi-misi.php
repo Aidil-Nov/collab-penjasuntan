@@ -293,13 +293,15 @@ $result = $conn->query($sql);
                     // Tampilkan berita
                     echo '
                     <div class="card">
-                        <img src="uploads/' . htmlspecialchars($rowCard["foto"]) . '" alt="Gambar Berita" class="card-image">
-                        <div class="card-content">
-                            <h2 class="card-title head-news">' . htmlspecialchars($rowCard["judul"]) . '</h2>
-                            <p class="meta-data section-description">' . date('d M Y', timestamp: strtotime($rowCard["tanggal_upload"])) . '</p>
-                            <p class="card-description highlight-news">' . htmlspecialchars($rowCard["highlight"]) . '</p>
-                            <button type="button" class="btn">Selengkapnya</button>
-                        </div>
+                        <a href="blog.php?id=' . htmlspecialchars($rowCard["id"]) . '">
+                            <img src="uploads/' . htmlspecialchars($rowCard["foto"]) . '" alt="Gambar Berita" class="card-image">
+                            <div class="card-content">
+                                <h2 class="card-title head-news">' . htmlspecialchars($rowCard["judul"]) . '</h2>
+                                <p class="meta-data section-description">' . date('d M Y', timestamp: strtotime($rowCard["tanggal_upload"])) . '</p>
+                                <p class="card-description highlight-news">' . htmlspecialchars($rowCard["highlight"]) . '</p>
+                                <button type="button" class="btn">Selengkapnya</button>
+                            </div>
+                        </a>
                     </div>
                 ';
                 }
