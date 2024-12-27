@@ -235,7 +235,6 @@ $resultSlider = $conn->query($sqlSlider);
             border: 1px solid #ddd;
             border-radius: 5px;
             transition: all 0.3s ease;
-            font-weight: bold;
         }
 
         .pagination-item:hover,
