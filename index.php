@@ -319,7 +319,7 @@
                 /* 2 kolom untuk card */
             }
     
-            .card {
+            .card a {
                 display: flex;
                 align-items: center;
             }
@@ -479,24 +479,26 @@
     <!-- Hero End -->
 
     
-    <!-- ABout Penjas -->
+    <!-- Aout Penjas -->
     <section class="about-section section-container">
         <div class="vertical-card">
             <div class="vertical-card-image-container">
                 <img src="./assets/about.png" alt="Pendidikan Jasmani" class="vertical-card-image">
             </div>
             <div class="vertical-card-content">
-                <p class="section-subheader">Tentang</p>
-                <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
-                <p class="vertical-card-description">
-                    Program Studi Pendidikan Jasmani atau biasa disebut penjas bertujuan mencetak tenaga pendidik dan
-                    profesional di
-                    bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan
-                    jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
-                    dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup
-                    sehat dan pengembangan olahraga.
-                </p>
-                <button class="btn" role="button">Selengkapnya</button>
+                <a href="profil-dosen.php">
+                    <p class="section-subheader">Tentang</p>
+                    <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
+                    <p class="vertical-card-description">
+                        Program Studi Pendidikan Jasmani atau biasa disebut penjas bertujuan mencetak tenaga pendidik dan
+                        profesional di
+                        bidang olahraga, kesehatan, dan rekreasi. Mahasiswa mempelajari teori dan praktik seperti pendidikan
+                        jasmani, teknik olahraga, serta manajemen kebugaran. Lulusannya
+                        dapat berkarier sebagai guru, pelatih, atau pengelola program rekreasi, dengan fokus pada gaya hidup
+                        sehat dan pengembangan olahraga.
+                    </p>
+                    <button class="btn" role="button">Selengkapnya</button>
+                </a>
             </div>
         </div>
     </section>
@@ -537,20 +539,23 @@
     
     <!-- Berita Card Section -->
     <section class="berita-section section-container">
-    <?php // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
-    $sql = "SELECT foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 3";
-    $result = $conn->query($sql);?>
-        <h3 class="section-subheader">Berita</h3>
-        <h2 class="section-header">Pendidikan Jasmani</h2>
-        <div class="card-grid">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    // Jalur gambar, diasumsikan folder uploads berada di direktori root server
-                    $imagePath = 'uploads/' . $row['foto'];
-                    ?>
-                    <!-- Card -->
-                    <div class="card">
+    <?php 
+    // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
+    $sql = "SELECT id, foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 3";
+    $result = $conn->query($sql);
+    ?>
+    <h3 class="section-subheader">Berita</h3>
+    <h2 class="section-header">Pendidikan Jasmani</h2>
+    <div class="card-grid">
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Jalur gambar, diasumsikan folder uploads berada di direktori root server
+                $imagePath = 'uploads/' . $row['foto'];
+                ?>
+                <!-- Card -->
+                <div class="card">
+                    <a href="blog.php?id=<?=htmlspecialchars($row['id'])?>">
                         <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
                         <div class="card-content">
                             <h2 class="card-title head-news"><?= htmlspecialchars($row['judul']); ?></h2>
@@ -560,15 +565,16 @@
                             </p>
                             <button type="button" class="btn">Selengkapnya</button>
                         </div>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo "<p>Tidak ada berita tersedia.</p>";
+                    </a>
+                </div>
+                <?php
             }
-            ?>
-        </div>
-    </section>
+        } else {
+            echo "<p>Tidak ada berita tersedia.</p>";
+        }
+        ?>
+    </div>
+</section>
     <!-- Berita Card Section END -->
     
     
