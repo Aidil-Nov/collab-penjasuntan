@@ -38,7 +38,7 @@ $resultSlider = $conn->query($sqlSlider);
             max-width: 1200px;
             overflow: hidden;
             border-radius: 8px;
-    
+
             margin: auto;
             margin-top: 1rem;
             box-shadow: var(--shadow);
@@ -117,7 +117,7 @@ $resultSlider = $conn->query($sqlSlider);
 
         /* BAGIAN CARD VERTIKAL */
 
-        .vertical-card {
+        .vertical-card a {
             display: grid;
             gap: 1rem;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -129,35 +129,35 @@ $resultSlider = $conn->query($sqlSlider);
             box-shadow: var(--shadow);
         }
 
-        .vertical-card-image-container {
+        a .vertical-card-image-container {
             width: 100%;
             height: 100%;
             overflow: hidden;
             border-radius: 5px;
         }
 
-        .vertical-card-image {
+        a .vertical-card-image {
             width: 100%;
             object-fit: cover;
             aspect-ratio: 16/9;
         }
 
-        .vertical-card-content {
+        a .vertical-card-content {
             display: block;
         }
 
-        .vertical-card-subheader {
+        a .vertical-card-subheader {
             font-size: 16px;
             color: #555;
             margin-bottom: 0.5rem;
         }
 
-        .vertical-card-header {
+        a .vertical-card-header {
             font-size: 24px;
             margin-bottom: 1rem;
         }
 
-        .vertical-card-description {
+        a .vertical-card-description {
             font-size: 14px;
             color: #333;
             margin-bottom: 1.5rem;
@@ -256,6 +256,7 @@ $resultSlider = $conn->query($sqlSlider);
         .pagination-arrow {
             font-size: 1.2rem;
         }
+
         .flag {
             position: absolute;
             background-color: var(--primary-color);
@@ -272,15 +273,15 @@ $resultSlider = $conn->query($sqlSlider);
         /* Responsivitas slider*/
 
         @media screen and (max-width: 768px) {
-            .vertical-card {
+            .vertical-card a{
                 grid-template-columns: 1fr;
             }
 
-            .vertical-card-header {
+            a .vertical-card-header {
                 font-size: 20px;
             }
 
-            .vertical-card-description {
+            a .vertical-card-description {
                 font-size: 13px;
             }
 
@@ -330,20 +331,20 @@ $resultSlider = $conn->query($sqlSlider);
         }
 
         @media screen and (max-width: 480px) {
-            .vertical-card {
+            .vertical-card a {
                 grid-template-columns: 1fr;
                 padding: 0.5rem;
             }
 
-            .vertical-card-header {
+            a .vertical-card-header {
                 font-size: 18px;
             }
 
-            .vertical-card-description {
+            a .vertical-card-description {
                 font-size: 12px;
             }
 
-            .vertical-card-button {
+            a .vertical-card-button {
                 padding: 0.4rem 0.8rem;
                 font-size: 14px;
             }
@@ -423,13 +424,15 @@ $resultSlider = $conn->query($sqlSlider);
                     // Tampilkan berita slider
                     echo '
                     <div class="slider-card">
+                        <a href="blog.php?id=' . htmlspecialchars($rowSlider["id"]) . '">
                             <img src="uploads/' . htmlspecialchars($rowSlider["foto"]) . '" alt="News Image">
                             <div class="content">
                                 <h2 class="section-header head-news">' . htmlspecialchars($rowSlider["judul"]) . '</h2>
                                 <p class="meta-data">' . date('d M Y', strtotime($rowSlider["tanggal_upload"])) . '</p>
                                 <p class="highlight highlight-news">' . htmlspecialchars($rowSlider["highlight"]) . '</p>
                             </div>
-                        </div>
+                        </a>
+                    </div>
                     ';
                 }
             } else {
@@ -441,51 +444,6 @@ $resultSlider = $conn->query($sqlSlider);
         <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </div>
 
-    <script>
-        let currentSlide = 0;
-        let autoSlideInterval;
-        let isSliding = false; // Flag untuk mencegah animasi berulang
-
-        function moveSlide(direction) {
-            if (isSliding) return; // Cegah aksi jika animasi masih berjalan
-
-            const slider = document.querySelector('.slider');
-            const slides = document.querySelectorAll('.slider-card');
-            const totalSlides = slides.length;
-
-            isSliding = true; // Set flag
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            // Atur jeda sebelum tombol bisa ditekan lagi
-            setTimeout(() => {
-                isSliding = false; // Reset flag setelah animasi selesai
-            }, 500); // Sesuaikan dengan durasi animasi CSS
-        }
-
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(() => {
-                moveSlide(1);
-            }, 5000);
-        }
-
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-
-        // Memulai slider otomatis
-        startAutoSlide();
-
-        // Menambahkan event listener untuk hover
-        const sliderContainer = document.querySelector('.slider-container');
-        sliderContainer.addEventListener('mouseenter', stopAutoSlide);
-        sliderContainer.addEventListener('mouseleave', startAutoSlide);
-
-        // Event listener untuk tombol navigasi
-        document.querySelector('.prev-button').addEventListener('click', () => moveSlide(-1));
-        document.querySelector('.next-button').addEventListener('click', () => moveSlide(1));
-    </script>
-
     <!-- Slider End -->
 
     <!-- About -->
@@ -496,9 +454,9 @@ $resultSlider = $conn->query($sqlSlider);
         $resultAbout = $conn->query($sqlAbout);
         if ($resultAbout->num_rows > 0) {
             while ($rowAbout = $resultAbout->fetch_assoc()) {
-
                 echo '
-                    <div class="vertical-card">
+                <div class="vertical-card">
+                    <a href="blog.php?id=' . htmlspecialchars($rowAbout["id"]) . '">
                         <div class="vertical-card-image-container">
                             <img src="uploads/' . htmlspecialchars($rowAbout["foto"]) . '" alt="Gambar Berita" class="vertical-card-image">
                         </div>
@@ -508,7 +466,8 @@ $resultSlider = $conn->query($sqlSlider);
                             <p class="vertical-card-description highlight-news">' . htmlspecialchars($rowAbout["highlight"]) . '</p>
                             <button type="button" class="btn">Selengkapnya</button>
                         </div>
-                    </div>
+                    </a>
+                </div>
                 ';
             }
         } else {
@@ -610,51 +569,97 @@ $resultSlider = $conn->query($sqlSlider);
     </section>
     <!-- Berita Card Section END-->
 
-    
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const paginationLinks = document.querySelectorAll('.pagination a');
 
-                paginationLinks.forEach(link => {
-                    link.addEventListener('click', event => {
-                        event.preventDefault(); // Mencegah refresh halaman
+    <script>
+        let currentSlide = 0;
+        let autoSlideInterval;
+        let isSliding = false; // Flag untuk mencegah animasi berulang
 
-                        const url = event.target.href;
+        function moveSlide(direction) {
+            if (isSliding) return; // Cegah aksi jika animasi masih berjalan
 
-                        // Fetch data dari URL pagination
-                        fetch(url)
-                            .then(response => response.text())
-                            .then(data => {
-                                const parser = new DOMParser();
-                                const htmlDoc = parser.parseFromString(data, 'text/html');
-                                const newCards = htmlDoc.querySelector('.card-grid').innerHTML;
-                                const newPagination = htmlDoc.querySelector('.pagination').innerHTML;
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slider-card');
+            const totalSlides = slides.length;
 
-                                // Update konten card-grid dan pagination
-                                document.querySelector('.card-grid').innerHTML = newCards;
-                                document.querySelector('.pagination').innerHTML = newPagination;
+            isSliding = true; // Set flag
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
 
-                                // Tambahkan kembali event listener ke link baru
-                                document.querySelectorAll('.pagination a').forEach(newLink => {
-                                    newLink.addEventListener('click', event => {
-                                        event.preventDefault();
-                                        const newUrl = event.target.href;
-                                        fetch(newUrl)
-                                            .then(response => response.text())
-                                            .then(newData => {
-                                                const newDoc = parser.parseFromString(newData, 'text/html');
-                                                const updatedCards = newDoc.querySelector('.card-grid').innerHTML;
-                                                const updatedPagination = newDoc.querySelector('.pagination').innerHTML;
-                                                document.querySelector('.card-grid').innerHTML = updatedCards;
-                                                document.querySelector('.pagination').innerHTML = updatedPagination;
-                                            });
-                                    });
+            // Atur jeda sebelum tombol bisa ditekan lagi
+            setTimeout(() => {
+                isSliding = false; // Reset flag setelah animasi selesai
+            }, 500); // Sesuaikan dengan durasi animasi CSS
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                moveSlide(1);
+            }, 5000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Memulai slider otomatis
+        startAutoSlide();
+
+        // Menambahkan event listener untuk hover
+        const sliderContainer = document.querySelector('.slider-container');
+        sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+        sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+        // Event listener untuk tombol navigasi
+        document.querySelector('.prev-button').addEventListener('click', () => moveSlide(-1));
+        document.querySelector('.next-button').addEventListener('click', () => moveSlide(1));
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const paginationLinks = document.querySelectorAll('.pagination a');
+
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', event => {
+                    event.preventDefault(); // Mencegah refresh halaman
+
+                    const url = event.target.href;
+
+                    // Fetch data dari URL pagination
+                    fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            const parser = new DOMParser();
+                            const htmlDoc = parser.parseFromString(data, 'text/html');
+                            const newCards = htmlDoc.querySelector('.card-grid').innerHTML;
+                            const newPagination = htmlDoc.querySelector('.pagination').innerHTML;
+
+                            // Update konten card-grid dan pagination
+                            document.querySelector('.card-grid').innerHTML = newCards;
+                            document.querySelector('.pagination').innerHTML = newPagination;
+
+                            // Tambahkan kembali event listener ke link baru
+                            document.querySelectorAll('.pagination a').forEach(newLink => {
+                                newLink.addEventListener('click', event => {
+                                    event.preventDefault();
+                                    const newUrl = event.target.href;
+                                    fetch(newUrl)
+                                        .then(response => response.text())
+                                        .then(newData => {
+                                            const newDoc = parser.parseFromString(newData, 'text/html');
+                                            const updatedCards = newDoc.querySelector('.card-grid').innerHTML;
+                                            const updatedPagination = newDoc.querySelector('.pagination').innerHTML;
+                                            document.querySelector('.card-grid').innerHTML = updatedCards;
+                                            document.querySelector('.pagination').innerHTML = updatedPagination;
+                                        });
                                 });
                             });
-                    });
+                        });
                 });
             });
-        </script>
+        });
+
+
+    </script>
 </body>
 
 </html>
