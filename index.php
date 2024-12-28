@@ -266,14 +266,9 @@
             transform: scale(1.05);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+       
     
-        #scrollToTopBtn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        transition: opacity 0.3s ease;
-    }
+        
     
     
         /* Responsifitas */
@@ -577,7 +572,7 @@
 </section>
     <!-- Berita Card Section END -->
     
-    
+    <button id="swipeUpBtn" style="display: none;">↑</button><button id="swipeUpBtn" style="display: none;">↑</button>
     <!-- Galeri Mahasiswa -->
     <section class="gallery-section section-container">
     <?php // Query untuk mengambil 9 foto terbaru berdasarkan tanggal_upload
@@ -603,27 +598,7 @@
     </section>
     <!-- Galeri Mahasiswa END-->
     
-    <script>
-        // Mendapatkan tombol
-        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-    
-        // Menampilkan tombol ketika pengguna menggulir ke bawah
-        window.onscroll = function() {
-            if (document.body.scrollHeight - window.scrollY <= window.innerHeight + 100) {
-                scrollToTopBtn.style.display = "block"; // Tampilkan tombol
-            } else {
-                scrollToTopBtn.style.display = "none"; // Sembunyikan tombol
-            }
-        };
-    
-        // Menambahkan fungsi untuk menggulir ke atas
-        scrollToTopBtn.addEventListener("click", function() {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth" // Efek scroll halus
-            });
-        });
-    </script>
+
     
 </body>
 </html>
