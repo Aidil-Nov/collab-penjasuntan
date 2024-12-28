@@ -56,6 +56,29 @@
         }
 
         /* REUSABLE CLASS*/
+        #swipeUpBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            z-index: 9999;
+        }
+
+        #swipeUpBtn:hover {
+            background-color: var(--primary-color-dark);
+        }
 
         .container {
             max-width: 1200px;
@@ -601,6 +624,29 @@
                 });
             });
         });
+
+
+
+        // SWIPE UP
+        const swipeUpBtn = document.getElementById("swipeUpBtn");
+
+        // Menampilkan tombol ketika pengguna menggulir ke bawah
+        window.onscroll = function () {
+            if (document.body.scrollHeight - window.scrollY <= window.innerHeight + 100) {
+                swipeUpBtn.style.display = "block"; // Tampilkan tombol
+            } else {
+                swipeUpBtn.style.display = "none"; // Sembunyikan tombol
+            }
+        };
+
+        // Menambahkan fungsi untuk menggulir ke atas
+        swipeUpBtn.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" // Efek scroll halus
+            });
+        });
     </script>
 </body>
+
 </html>
