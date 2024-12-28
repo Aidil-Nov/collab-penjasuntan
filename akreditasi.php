@@ -58,6 +58,8 @@
             </div>
         </div>
     </section>
+    <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>   
+    <script src="./js/swipeup.js"></script> 
 </body>
 </html>
 

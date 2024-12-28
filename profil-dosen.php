@@ -1,4 +1,6 @@
 <?php include './include/header.php'; ?>
+<?php include './Data/db_connect.php'; ?>
+
 <html lang="en">
 
 <head>
@@ -7,18 +9,19 @@
     <title>Profil|Profil Dosen</title>
     <style>
         /* Dosen */
+
         .dosen-grid-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            margin-top: 2rem;
+            gap: 5rem;
+            margin-top: 5rem;
         }
 
         .dosen-grid {
             display: grid;
-            gap: 20px;
             justify-items: center;
             align-items: center;
+            gap: 5rem ;
         }
 
         /* Grid pertama: satu card di tengah */
@@ -41,6 +44,7 @@
             transition: transform 0.3s ease;
             width: 100%;
             max-width: 300px;
+            min-width: 100px;
 
         }
 
@@ -117,6 +121,10 @@
             .dosen-grid-multiple {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .dosen-info {
+            padding: 10px;
+            font-size: 0.5rem;
+        }
         }
 
         @media screen and (max-width: 480px) {
@@ -151,93 +159,51 @@
     
     <!-- Dosen -->
     <section class="dosen-section section-container">
-        <h1 class="section-subheader">Profil Dosen Prodi Penjas</h1>
+        <h1 class="section-subheader">Dosen Penjas </h1>
         <p class="section-description-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit repellat, quia
             quis dolorum unde ad temporibus, similique cumque omnis velit est libero quos quae hic delectus doloremque
             reprehenderit nesciunt necessitatibus.</p>
         <div class="dosen-grid-container">
-            <!-- Card pertama -->
+             <!-- Card untuk Dosen Dekan -->
             <div class="dosen-grid dosen-grid-single">
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 1">
-                    <div class="dosen-info">
-                        <h2>Andika Triansyah, S.Pd, M.Or</h2>
-                        <p>NIP. 198911212015041001</p>
-                    </div>
-                </div>
+                <?php
+                // Query untuk mengambil data dosen dengan jabatan Dekan
+                $queryDekan = "SELECT * FROM dosen WHERE jabatan = 'Dekan'";
+                $resultDekan = mysqli_query($conn, $queryDekan);
+                
+                if ($rowDekan = mysqli_fetch_assoc($resultDekan)) {
+                    echo '<div class="dosen-card">';
+                    echo '<img src="' . $rowDekan['foto'] . '" alt="' . $rowDekan['nama'] . '">';
+                    echo '<div class="dosen-info">';
+                    echo '<h2>' . $rowDekan['nama'] . '</h2>';
+                    echo '<p>NIP. ' . $rowDekan['nip'] . '</p>';
+                    echo '</div></div>';
+                }
+                ?>
             </div>
     
-            <!-- Grid untuk beberapa card -->
+            <!-- Grid untuk Dosen selain Dekan -->
             <div class="dosen-grid dosen-grid-multiple">
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 2">
-                    <div class="dosen-info">
-                        <h2>Rani Wijaya, S.Pd, M.Or</h2>
-                        <p>NIP. 199201042016011002</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 3">
-                    <div class="dosen-info">
-                        <h2>Agus Santoso, S.Pd, M.Or</h2>
-                        <p>NIP. 198812192017031003</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 4">
-                    <div class="dosen-info">
-                        <h2>Dina Rahmawati, S.Pd, M.Or</h2>
-                        <p>NIP. 199105082017041004</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 4">
-                    <div class="dosen-info">
-                        <h2>Dina Rahmawati, S.Pd, M.Or</h2>
-                        <p>NIP. 199105082017041004</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 4">
-                    <div class="dosen-info">
-                        <h2>Dina Rahmawati, S.Pd, M.Or</h2>
-                        <p>NIP. 199105082017041004</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 4">
-                    <div class="dosen-info">
-                        <h2>Dina Rahmawati, S.Pd, M.Or</h2>
-                        <p>NIP. 199105082017041004</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 4">
-                    <div class="dosen-info">
-                        <h2>Dina Rahmawati, S.Pd, M.Or</h2>
-                        <p>NIP. 199105082017041004</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 4">
-                    <div class="dosen-info">
-                        <h2>Dina Rahmawati, S.Pd, M.Or</h2>
-                        <p>NIP. 199105082017041004</p>
-                    </div>
-                </div>
-                <div class="dosen-card">
-                    <img src="https://via.placeholder.com/250" alt="Dosen 4">
-                    <div class="dosen-info">
-                        <h2>Dina Rahmawati, S.Pd, M.Or</h2>
-                        <p>NIP. 199105082017041004</p>
-                    </div>
-                </div>
-    
-                <!-- Tambahkan card lainnya sesuai kebutuhan -->
+                <?php
+                // Query untuk mengambil data dosen dengan jabatan selain Dekan
+                $queryNonDekan = "SELECT * FROM dosen WHERE jabatan != 'Dekan'";
+                $resultNonDekan = mysqli_query($conn, $queryNonDekan);
+                
+                while ($rowNonDekan = mysqli_fetch_assoc($resultNonDekan)) {
+                    echo '<div class="dosen-card">';
+                    echo '<img src="' . $rowNonDekan['foto'] . '" alt="' . $rowNonDekan['nama'] . '">';
+                    echo '<div class="dosen-info">';
+                    echo '<h2>' . $rowNonDekan['nama'] . '</h2>';
+                    echo '<p>NIP. ' . $rowNonDekan['nip'] . '</p>';
+                    echo '</div></div>';
+                }
+                ?>
             </div>
         </div>
     </section>
     <!-- Dosen END -->
+    <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>   
+    <script src="./js/swipeup.js"></script> 
 </body>
 </html>
 <?php include './include/footer.php' ?>

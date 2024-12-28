@@ -568,7 +568,8 @@ $resultSlider = $conn->query($sqlSlider);
     </section>
     <!-- Berita Card Section END-->
 
-
+    <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>   
+    <script src="./js/swipeup.js"></script> 
     <script>
         let currentSlide = 0;
         let autoSlideInterval;

@@ -31,6 +31,8 @@
         <img src="./assets/struktur_organisasi/struktur-organisasi.jpg" alt="">
     </section>
     <!-- Struktur Organiasi END -->
+    <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>   
+    <script src="./js/swipeup.js"></script> 
 </body>
 </html>
 
