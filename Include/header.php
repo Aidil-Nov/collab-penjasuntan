@@ -88,7 +88,7 @@
         .section-container {
             max-width: var(--max-width);
             margin: auto;
-            padding: 3rem 1rem;
+            padding: 1rem 1rem;
         }
 
         .section-subheader {
@@ -125,7 +125,7 @@
         }
 
         .section-description-black {
-            max-width: 600px;
+
             margin-bottom: 1rem;
             color: var(--text-dark);
         }
