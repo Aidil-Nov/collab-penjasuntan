@@ -7,50 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penelitian</title>
     <style>
-        /* tabel */
-        .table-section {
-            padding-top: 2rem 1rem;
+        body {
+            display: grid;
         }
 
-        .table-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            box-shadow: var(--shadow);
-        }
-
-        .table-main {
-            margin-top: 1rem;
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border-radius: 8px;
-        }
-
-        th,
-        td {
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            text-align: left;
-
-        }
-
-        .t-header {
-            color: var(--text-dark);
-            font-weight: 600;
-            text-align: center;
-            background-color: var(--primary-color);
-        }
-
-        .t-header:last-child,
-        td:first-child,
-        td:last-child {
-            width: 100px;
-            text-align: center;
-        }
 
         /* Card Berita */
         .card-grid {
@@ -101,6 +61,67 @@
         .card-description {
             font-size: 14px;
             color: #555;
+        }
+
+        /* General Styling for the Section */
+        .penelitian-section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1rem auto;
+        }
+
+        .penelitian {
+            border-bottom: 0.5px grey solid;
+            border-top: 0.5px grey solid;
+            padding: 1rem;
+        }
+
+        /* Styling for the Journal Title */
+        .judul-jurnal {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for the Journal Description */
+        .deskripsi-jurnal {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the Authors Title */
+        .nama-penulis {
+            font-size: 18px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for the Authors List */
+        .daftar-penulis {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .daftar-penulis li {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Styling for the Download Button */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #0056b3;
         }
 
         /* Mobile Phones (up to 480px) */
@@ -200,29 +221,64 @@
 </head>
 
 <body>
-
-    <section class="table-section section-container">
+    <section class="penelitian-section section-container">
         <h2 class="section-subheader">Penelitian</h2>
-        <div class="table-container">
-            <table class="table-main">
-                <thead>
-                    <tr>
-                        <th id="no" class="t-header">No</th>
-                        <th id="name" class="t-header">Judul</th>
-                        <th id="tahun" class="t-header">Tahun</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Judul...</td>
-                        <td>Tahun</td>
-                    </tr>
-                    <!-- Tambahkan baris tambahan sesuai kebutuhan -->
-                </tbody>
-            </table>
-        </div>
+
+        <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/view/40340">
+            <div class="penelitian">
+                <h2>PENGARUH LATIHAN PLIOMETRIK TERHADAP HASIL LONG PASSING SEPAK BOLA</h2>
+                <p>Ahmad Ridwan, Eka Supriatna, Fitriana Puspa Hidasari</p>
+                <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/view/40340/75676585732  "
+                    class="btn">Download</a>
+            </div>
+        </a>
+
+        <a href="https://jurnal.untan.ac.id/index.php/JPJK/article/view/63050">
+            <div class="penelitian">
+                <h2>Kepercayaan Diri Dan Kondisi Fisik Mahasiswa Pendidikan Jasmani Dalam Perkuliahan Gulat</h2>
+                <p>Andika Wahyudi</p>
+                <a href="https://jurnal.untan.ac.id/index.php/JPJK/article/view/63050/75676597653"
+                    class="btn">Download</a>
+            </div>
+        </a>
+
+        <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/view/63588">
+            <div class="penelitian">
+                <h2>KONTRIBUSI PANJANG TUNGKAI DAN KECEPATAN LARI TERHADAP MENGGIRING PADA PERMAINAN SEPAK BOLA</h2>
+                <p>Franciskus Efendi Situmorang, Ahmad Atiq, Mimi Haetami</p>
+                <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/view/63588/75676596709"
+                    class="btn">Download</a>
+            </div>
+        </a>
+
+        <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/viewFile/53726/75676592651">
+            <div class="penelitian">
+                <h2>PEMBINAAN SEPAKBOLA KLUB
+                    GAPURA FOOTBALL CLUB KABUPATEN SAMBAS</h2>
+                <p></p>
+                <a href="" class="btn">Download</a>
+            </div>
+        </a>
+
+        <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/viewFile/53726/75676592651">
+            <div class="penelitian">
+                <h2>PLAYING HAND EYE COORDINATION ON PPLP ARREST PERFORMANCE WEST KALIMANTAN</h2>
+                <p>Zakaria Zakaria, Edi Purnomo, Y Touvan Juni Samodra</p>
+                <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/view/30488/75676579631" class="btn">Download</a>
+            </div>
+        </a>
+        <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/view/49907">
+            <div class="penelitian">
+                <h2>PENGARUH PASSIVE STRETCHING TERHADAP KEMAMPUAN KAYANG SENAM LANTAI MAHASISWA PENDIDIKAN JASMANI UNTAN</h2>
+                <p>Serin Serin, Mimi Haetami, Novi Yanti</p>
+                <a href="https://jurnal.untan.ac.id/index.php/jpdpb/article/view/49907/75676590836" class="btn">Download</a>
+            </div>
+        </a>
     </section>
+
+
+
+
     <section class="berita-section section-container">
         <?php
         // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
