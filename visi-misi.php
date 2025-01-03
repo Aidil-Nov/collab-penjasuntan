@@ -32,6 +32,7 @@ $result = $conn->query($sql);
             background-color: #fff;
             border-radius: 8px;
             width: 70%;
+            align-items: center;
         }
 
         .vision-mission-content {
@@ -244,7 +245,7 @@ $result = $conn->query($sql);
         <!-- Headline -->
         <div class="headline-wrapper">
             <div class="headline-list">
-                <h2 class="section-header">Headline Berita</h2>
+                <h1 class="section-subheader">Headline Berita</h1>
                 <div class="headline-item">
                     <?php
                     if ($result->num_rows > 0) {
