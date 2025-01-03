@@ -28,7 +28,8 @@
 
         .vertical-card-image {
             width: 100%;
-            height: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
             object-fit: cover;
         }
 
@@ -376,7 +377,8 @@
     <section class="about-section section-container">
         <div class="vertical-card">
             <div class="vertical-card-image-container">
-                <img src="https://via.placeholder.com/500x300" alt="Pendidikan Jasmani" class="vertical-card-image">
+                <img src="./uploads/1732442475_6742f96b1fe57.png" alt=""
+                    class="vertical-card-image">
             </div>
             <div class="vertical-card-content">
                 <p class="section-subheader">Tentang</p>
@@ -394,13 +396,12 @@
 
     <!-- PDF -->
     <section>
-    
         <div id="pdf-container" style="display: none;">
-        <div class="pdf-wrapper">
-            <button id="closePDFBtn" class="btn">Tutup PDF</button>
-            <iframe src="./assets/SK.pdf" width="100%" height="500px"></iframe>
+            <div class="pdf-wrapper">
+                <button id="closePDFBtn" class="btn">Tutup PDF</button>
+                <iframe src="./assets/SK.pdf" width="100%" height="500px"></iframe>
+            </div>
         </div>
-    </div>
     </section>
     <!-- PDF END -->
 
@@ -469,7 +470,7 @@
 
                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                     <a href="?page=<?php echo $i; ?>" <?php if ($i == $page)
-                    echo 'class="pagination-item active"'; ?>><?php echo $i; ?></a>
+                           echo 'class="pagination-item active"'; ?>><?php echo $i; ?></a>
                 <?php endfor; ?>
 
                 <?php if ($page < $total_pages): ?>
@@ -481,33 +482,33 @@
     </section>
     <!-- Data Mahasiswa Hima END -->
 
-    <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>   
-    <script src="./js/swipeup.js"></script> 
+    <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>
+    <script src="./js/swipeup.js"></script>
     <script>
-       document.addEventListener("DOMContentLoaded", function() {
-        const showPDFBtn = document.getElementById("showPDFBtn");
-        const pdfContainer = document.getElementById("pdf-container");
-        const closePDFBtn = document.getElementById("closePDFBtn");
+        document.addEventListener("DOMContentLoaded", function () {
+            const showPDFBtn = document.getElementById("showPDFBtn");
+            const pdfContainer = document.getElementById("pdf-container");
+            const closePDFBtn = document.getElementById("closePDFBtn");
 
-        // Menambahkan event listener untuk tombol tampilkan PDF
-        showPDFBtn.addEventListener("click", function () {
-            pdfContainer.style.display = "flex"; // Menampilkan PDF
-        });
+            // Menambahkan event listener untuk tombol tampilkan PDF
+            showPDFBtn.addEventListener("click", function () {
+                pdfContainer.style.display = "flex"; // Menampilkan PDF
+            });
 
-        // Menambahkan event listener untuk tombol tutup PDF
-        closePDFBtn.addEventListener("click", function () {
-            pdfContainer.style.display = "none"; // Menyembunyikan PDF
-        });
+            // Menambahkan event listener untuk tombol tutup PDF
+            closePDFBtn.addEventListener("click", function () {
+                pdfContainer.style.display = "none"; // Menyembunyikan PDF
+            });
 
-        // Menutup PDF saat mengklik area di luar modal
-        pdfContainer.addEventListener("click", function (event) {
-            if (event.target === pdfContainer) {
-                pdfContainer.style.display = "none";
-            }
+            // Menutup PDF saat mengklik area di luar modal
+            pdfContainer.addEventListener("click", function (event) {
+                if (event.target === pdfContainer) {
+                    pdfContainer.style.display = "none";
+                }
+            });
         });
-    });
     </script>
-    
+
 </body>
 
 </html>
