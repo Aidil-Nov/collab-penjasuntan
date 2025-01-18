@@ -112,7 +112,6 @@
         }
 
 
-
         .button-close {
             display: flex;
             justify-content: flex-end;
@@ -262,32 +261,14 @@
         /* Responsive Breakpoints */
 
         @media screen and (max-width: 480px) {
-            .pdf-wrapper {
-                width: 95%;
-                max-height: 95vh;
-            }
 
-            .pdf-content {
-                height: 85vh;
-            }
         }
 
         @media screen and (min-width: 481px) and (max-width: 768px) {
-            .pdf-wrapper {
-                width: 90%;
-                max-height: 92vh;
-            }
-
-            .pdf-content {
-                height: 88vh;
-            }
+        
         }
 
         @media screen and (min-width: 769px) and (max-width: 1024px) {
-            .pdf-wrapper {
-                width: 85%;
-                max-height: 90vh;
-            }
         }
 
 
@@ -389,6 +370,7 @@
                     corrupti quod optio magni. Reprehenderit?
                 </p>
                 <button id="showPDFBtn" class="btn">Tampilkan SK</button>
+
             </div>
         </div>
     </section>
@@ -482,33 +464,11 @@
     </section>
     <!-- Data Mahasiswa Hima END -->
 
-    <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>
+    <button id="swipeUpBtn" style="display: none;">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
     <script src="./js/swipeup.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const showPDFBtn = document.getElementById("showPDFBtn");
-            const pdfContainer = document.getElementById("pdf-container");
-            const closePDFBtn = document.getElementById("closePDFBtn");
-
-            // Menambahkan event listener untuk tombol tampilkan PDF
-            showPDFBtn.addEventListener("click", function () {
-                pdfContainer.style.display = "flex"; // Menampilkan PDF
-            });
-
-            // Menambahkan event listener untuk tombol tutup PDF
-            closePDFBtn.addEventListener("click", function () {
-                pdfContainer.style.display = "none"; // Menyembunyikan PDF
-            });
-
-            // Menutup PDF saat mengklik area di luar modal
-            pdfContainer.addEventListener("click", function (event) {
-                if (event.target === pdfContainer) {
-                    pdfContainer.style.display = "none";
-                }
-            });
-        });
-    </script>
-
+    <script src="./js/pdf.js"></script>
 </body>
 
 </html>

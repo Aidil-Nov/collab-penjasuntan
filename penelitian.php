@@ -278,44 +278,6 @@
 
 
 
-
-    <section class="berita-section section-container">
-        <?php
-        // Query untuk mengambil 3 berita terbaru berdasarkan tanggal_upload
-        $sql = "SELECT id, foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 3";
-        $result = $conn->query($sql);
-        ?>
-        <h3 class="section-subheader">Berita</h3>
-        <h2 class="section-header">Pendidikan Jasmani</h2>
-        <div class="card-grid">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    // Jalur gambar, diasumsikan folder uploads berada di direktori root server
-                    $imagePath = 'uploads/' . $row['foto'];
-                    ?>
-                    <!-- Card -->
-                    <div class="card">
-                        <a href="blog.php?id=<?= htmlspecialchars($row['id']) ?>">
-                            <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
-                            <div class="card-content">
-                                <h2 class="card-title head-news"><?= htmlspecialchars($row['judul']); ?></h2>
-                                <p class="section-description"><?= date('d M Y', strtotime($row['tanggal_upload'])); ?></p>
-                                <p class="card-description highlight-news">
-                                    <?= htmlspecialchars($row['highlight']); ?>
-                                </p>
-                                <button type="button" class="btn">Selengkapnya</button>
-                            </div>
-                        </a>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo "<p>Tidak ada berita tersedia.</p>";
-            }
-            ?>
-        </div>
-    </section>
     <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>
     <script src="./js/swipeup.js"></script>
 

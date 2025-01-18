@@ -140,12 +140,14 @@
                 <thead>
                     <tr>
                         <th class="t-header">Judul</th>
+                        <th class="t-header">Gambar</th>
                         <th class="t-header">Tahun</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td data-label="Judul">Pemanfaatan Artificial Intellegence (AI) dalam Pembellajaran Pendidikan Jasmani Olahraga dan Kesehatan</td>
+                        <td data-label="Gambar"><img src="" alt=""></td>
                         <td data-label="Tahun">2024</td>
                     </tr>
                 </tbody>
@@ -155,16 +157,19 @@
                 <thead>
                     <tr>
                         <th class="t-header">Judul</th>
+                        <th class="t-header">Gambar</th>
                         <th class="t-header">Tahun</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td data-label="Judul">Pelatihan Perwasitan Olahraga Permainan Tingkat Provinsi</td>
+                        <td data-label="Gambar"><img src="" alt=""></td>
                         <td data-label="Tahun">2023</td>
                     </tr>
                     <tr>
                         <td data-label="Judul">Peningkatan Kompetensi Mahasiswa Dalam Perwasitan</td>
+                        <td data-label="Gambar"><img src="" alt=""></td>
                         <td data-label="Tahun">2023</td>
                     </tr>
                 </tbody>
@@ -174,12 +179,14 @@
                 <thead>
                     <tr>
                         <th class="t-header">Judul</th>
+                        <th class="t-header">Gambar</th>
                         <th class="t-header">Tahun</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td data-label="Judul">Sosialisasi Penyusunan Portofolio Seleksi Masuk Prodi Pendidikan Jasmani Fakultas Keguruan Dan Ilmu Pendidikan Universitas Tanjungpura Tahun 2022</td>
+                        <td data-label="Gambar"><img src="" alt=""></td>
                         <td data-label="Tahun">2022</td>
                     </tr>
                 </tbody>
@@ -189,12 +196,14 @@
                 <thead>
                     <tr>
                         <th class="t-header">Judul</th>
+                        <th class="t-header">Gambar</th>
                         <th class="t-header">Tahun</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td data-label="Judul">Peningkatan Pendidikan Karakter Nasionalisme Melalui Pendidikan Jasmani</td>
+                        <td data-label="Gambar"><img src="" alt=""></td>
                         <td data-label="Tahun">2021</td>
                     </tr>
                 </tbody>

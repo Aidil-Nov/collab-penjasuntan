@@ -124,19 +124,17 @@
 
             <!-- Address Section -->
             <div class="footer-address">
-                <h3>Alamat Kami</h3>
+                <h3>Alamat</h3>
                 <p><i class="fa-solid fa-location-dot"></i> Jl. Profesor Dokter H. Hadari Nawawi</p>
-                <p>Kota Universitas</p>
                 <p>Bansir Laut, Kec. Pontianak Tenggara, Kota Pontianak,</p>
-                <p>Kalimantan Barat 78115</p>
+                <p>Kalimantan Barat 78124</p>
                 <p>Indonesia</p>
             </div>
 
             <!-- Contact Section -->
             <div class="footer-contact">
-                <h3>Kontak</h3>
-                <a href="tel:+6281234567890">Telp: +62 812 3456 7890</a>    
-                <a href="mailto:penjas@untan.ac.id">Email: penjas@untan.ac.id</a>
+                <h3>Kontak</h3>   
+                <a href="mailto:penjas@untan.ac.id">penjas@untan.ac.id</a>
                 <div class="social-media">
                     <a href="https://www.instagram.com/penjas.untan_official?igsh=MXdweHg3MzdiNjB1Ng=="><i class="ri-instagram-line"></i> Instagram</a>
                     <a href="https://youtube.com/@penjasuntan3826?si=dIo2ZsZjrkm_-qr4"><i class="ri-youtube-line"></i> Youtube</a>

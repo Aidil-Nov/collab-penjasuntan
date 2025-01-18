@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendidikan Jasmani Untan</title>
     <style>
+
         .section-container {
             max-width: var(--max-width);
             margin: auto;
@@ -104,6 +105,7 @@
             background-size: cover;
             background-position: center;
             z-index: 1;
+            
         }
 
         .hero-text {
@@ -406,6 +408,7 @@
 
             .facility-item {
                 padding: 0.8rem;
+                text-align: center;
             }
 
             .facility-icon {
@@ -414,6 +417,7 @@
 
             .facility-title {
                 font-size: 0.85rem;
+                text-align: center;
             }
 
             .card-grid {
@@ -463,12 +467,52 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+        .view {
+        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+        }
+        .hidden {
+            opacity: 0 ;
+            filter: blur(5px);
+            transition: all 1s;
+        }
+
+        .hero-section hidden {
+
+            filter: blur(1px);
+        }
+        .show {
+            opacity: 1;
+            filter: blur(0);
+        }
+
+
+        /* animation when scroll */
+      @keyframes appear {
+        from {
+          opacity: 0;
+          clip-path: inset(100% 100% 0 0);
+        }
+        to {
+          opacity: 1;
+          clip-path: inset(0 0 0 0);
+        }
+      }
+
+      .block {
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 40%;
+      }
     </style>
+    <link rel="stylesheet" href="./js/app.css">
 </head>
 
 <body>
     <!-- Hero  -->
-    <section class="hero-section">
+    <div class="view">
+    <section class="hero-section hidden">
         <div class="hero-text">
             <h1 class="">Selamat Datang di laman Prodi Pendidikan Jasmani <br> FKIP Universitas Tanjungpura</h1>
         </div>
@@ -478,14 +522,14 @@
 
     <!-- Aout Penjas -->
     <section class="about-section section-container">
-        <div class="vertical-card">
+        <div class="vertical-card block">
             <div class="vertical-card-image-container">
                 <img src="./assets/about.png" alt="Pendidikan Jasmani" class="vertical-card-image">
             </div>
             <div class="vertical-card-content">
                 <a href="profil-dosen.php">
-                    <p class="section-subheader">Tentang</p>
-                    <h2 class="vertical-card-header">Pendidikan Jasmani</h2>
+                    <p class="section-subheader block">Tentang</p>
+                    <h2 class="vertical-card-header block">Pendidikan Jasmani</h2>
                     <p class="vertical-card-description">
                         Program Studi Pendidikan Jasmani atau biasa disebut penjas bertujuan mencetak tenaga pendidik
                         dan
@@ -503,35 +547,36 @@
         </div>
     </section>
     <!-- About Penjas End-->
+    
 
     <!-- Fasilitas -->
     <section class="fasilitas-section section-container">
-        <h3 class="section-subheader">Fasilitas</h3>
-        <h2 class="section-header">Prodi</h2>
+        <h3 class="section-subheader block">Fasilitas</h3>
+        <h2 class="section-header block">Prodi</h2>
         <div class="facility-grid">
-            <div class="facility-item">
+            <div class="facility-item block">
                 <span><i class="fa-solid fa-mosque"></i></span>
                 <h3 class="facility-title">Masjid</h3>
             </div>
-            <div class="facility-item">
+            <div class="facility-item block">
                 <span><i class="fa-solid fa-wifi"></i></span>
                 <h3 class="facility-title">Free Wifi</h3>
             </div>
-            <div class="facility-item">
+            <div class="facility-item block">
                 <span><i class="fa-solid fa-book"></i></span>
                 <h3 class="facility-title">Perpustakaan</h3>
             </div>
-            <div class="facility-item">
+            <div class="facility-item block">
                 <span><i class="fa-solid fa-utensils"></i></span>
                 <h3 class="facility-title">Kantin</h3>
             </div>
-            <div class="facility-item">
+            <div class="facility-item block">
                 <span><i class="fa-solid fa-school"></i></span>
                 <h3 class="facility-title">Auditorium</h3>
             </div>
-            <div class="facility-item">
+            <div class="facility-item block">
                 <span><i class="fa-solid fa-dumbbell"></i></span>
-                <h3 class="facility-title">Gym</h3>
+                <h3 class="facility-title">Laboratorium Olahraga</h3>
             </div>
         </div>
     </section>
@@ -544,8 +589,8 @@
         $sql = "SELECT id, foto, judul, highlight, tanggal_upload FROM berita ORDER BY tanggal_upload DESC LIMIT 3";
         $result = $conn->query($sql);
         ?>
-        <h3 class="section-subheader">Berita</h3>
-        <h2 class="section-header">Pendidikan Jasmani</h2>
+        <h3 class="section-subheader block">Berita</h3>
+        <h2 class="section-header block">Pendidikan Jasmani</h2>
         <div class="card-grid">
             <?php
             if ($result->num_rows > 0) {
@@ -554,7 +599,7 @@
                     $imagePath = 'uploads/' . $row['foto'];
                     ?>
                     <!-- Card -->
-                    <div class="card">
+                    <div class="card hidden">
                         <a href="blog.php?id=<?= htmlspecialchars($row['id']) ?>">
                             <img src="<?= htmlspecialchars($imagePath); ?>" alt="Gambar Berita" class="card-image">
                             <div class="card-content">
@@ -584,7 +629,7 @@
         $sql = "SELECT foto FROM galeri ORDER BY tanggal_upload DESC LIMIT 9";
         $result = $conn->query($sql);
         ?>
-        <h3 class="section-subheader">Galeri Mahasiswa</h3>
+        <h3 class="section-subheader block">Galeri Mahasiswa</h3>
         <div class="gallery-grid">
             <?php
             if ($result->num_rows > 0) {
@@ -592,7 +637,7 @@
                     // Jalur gambar, diasumsikan folder uploads berada di direktori root server
                     $imagePath = 'uploads/' . $row['foto'];
                     ?>
-                    <img src="<?= htmlspecialchars($imagePath); ?>" class="gallery-image" alt="Gallery Image">
+                    <img src="<?= htmlspecialchars($imagePath); ?>" class="gallery-image hidden" alt="Gallery Image">
                     <?php
                 }
             } else {
@@ -602,13 +647,11 @@
         </div>
     </section>
     <!-- Galeri Mahasiswa END-->
-
-    
     <button id="swipeUpBtn" style="display: none;"><i class="fa-solid fa-chevron-up"></i></button>   
     <script src="./js/swipeup.js"></script> 
-
+    <script src="./js/app.js"></script>
+    </div>
 </body>
-
 </html>
 
 <?php include './include/footer.php'; ?>

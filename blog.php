@@ -154,7 +154,7 @@ $row = $result->fetch_assoc();
                 $sqlHeadline = "SELECT id, foto, judul, highlight, tanggal_upload
                     FROM berita
                     WHERE id NOT IN (" . implode(',', $excludedIds) . ")
-                    ORDER BY view_count DESC LIMIT 5";
+                    ORDER BY view_count DESC";
                 $resultHeadline = $conn->query($sqlHeadline);
 
 

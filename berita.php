@@ -413,7 +413,7 @@ $resultSlider = $conn->query($sqlSlider);
 <body>
     <!-- Slider Mengambil Berita Terbaru Di Upload-->
     <div class="slider-container">
-        <h3 class="section-header flag">Berita Populer</h3>
+        <h3 class="section-header flag">Berita Terbaru</h3>
         <div class="slider">
             <?php
             if ($resultSlider->num_rows > 0) {

@@ -35,7 +35,7 @@ if (isset($_POST['add_dosen']) && isset($_FILES['gambar']) && $_FILES['gambar'][
 
     // Proses unggah file
     $file = $_FILES['gambar'];
-    $targetDir = './uploads/';  // Direktori tempat file disimpan
+    $targetDir = '../uploads/';  // Direktori tempat file disimpan
     $newFileName = time() . '_' . basename($file['name']);
     $filePath = $targetDir . $newFileName;
 
@@ -101,7 +101,7 @@ if (isset($_POST['delete_dosen'])) {
 
 
 // Fungsi untuk mengupload file
-function uploadFile($file, $targetDir = './uploads/')
+function uploadFile($file, $targetDir = '../uploads/')
 {
     $allowedExtensions = ['jpg', 'jpeg', 'png'];
     $fileName = $file['name'];
